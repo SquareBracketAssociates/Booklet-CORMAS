@@ -14,6 +14,16 @@ Those command line will download a pharo distribution maid for pillar.
 
 ## Compilation from sources
 
+In order to build a human reading file, you need to compile the source file :
+
+    ./pillar export --to=html book.pillar
+
+It creates an `output.html.json` file note yet readable by humans.
+
+  ./mustache --data=output.html.json --template=support/templates/html.mustache > myfile.html
+
+Et voilà !
+
 ## Cheatsheets
 information from [html](https://ci.inria.fr/pharo-contribution/job/EnterprisePharoBook/lastSuccessfulBuild/artifact/book-result/PillarChap/Pillar.html). Pillar is a maked language as markdown.
 
