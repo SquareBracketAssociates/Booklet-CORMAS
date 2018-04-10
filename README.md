@@ -3,10 +3,10 @@
 [![Build Status](https://travis-ci.org/cormas/Booklet-CORMAS.svg?branch=master)](https://travis-ci.org/cormas/Booklet-CORMAS)
 
 ## Install pillar on our computer
-Most of the information about pillar are available [here](https://ci.inria.fr/pharo-contribution/job/EnterprisePharoBook/lastSuccessfulBuild/artifact/book-result/PillarChap/Pillar.pdf). But we provide there a quick stater quite in order to compile in PDF/html the book source code.
+Most of the information about pillar are available [here](https://ci.inria.fr/pharo-contribution/job/EnterprisePharoBook/lastSuccessfulBuild/artifact/book-result/PillarChap/Pillar.pdf). But we provide there a quick strater quite in order to compile in PDF/html the book source code.
 
 ### Install for Linux users
-Those command line will download a pharo distribution maid for pillar.
+Those command line will download a pharo distribution made for pillar.
 
     wget https://raw.githubusercontent.com/pillar-markup/pillar/master/download.sh
     chmod +x download.sh
