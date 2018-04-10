@@ -81,7 +81,7 @@ for
 
 ## Bibliographie
 
-Cassou D. Ducasse S. Fabresse L. Fabry J. Caekenberghe S. V., 2016,*Documenting and Presenting
-with Pillar* , in Enterprise Pharo a Web Perspective, p 209-232.
+Cassou D. Ducasse S. Fabresse L. Fabry J. Caekenberghe S. V., 2016,[*Documenting and Presenting
+with Pillar*](http://files.pharo.org/books-pdfs/entreprise-pharo/2016-10-06-EnterprisePharo.pdf) , in Enterprise Pharo a Web Perspective, p 209-232.
 
 Ducasse S. and Polito G., 2017, [Publishing Documents with Pillar 7.0](https://github.com/SquareBracketAssociates/Booklet-PublishingAPillarBooklet), Square Bracket tutorials
