@@ -65,10 +65,12 @@ Because based on Pharo Smalltalk, Cormas is a cross-platform software that can d
 !!! Opening CORMAS
 
 !!! Creating a new CORMAS Model
-[[[CormasModel subclass: #ECEC
+[[[
+CormasModel subclass: #ECEC
 	instanceVariableNames: ''
 	classVariableNames: ''
-	package: 'ECECCategory']]]
+	package: 'ECECCategory'
+]]]
 	
 !!! Defining a spatial entity: the "VegetationUnit"
 !!! Designing the VegetationUnit Behavior
