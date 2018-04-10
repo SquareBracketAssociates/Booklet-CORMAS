@@ -20,7 +20,7 @@ In order to build a human reading file, you need to compile the source file :
 
 It creates an `output.html.json` file note yet readable by humans.
 
-  ./mustache --data=output.html.json --template=support/templates/html.mustache > myfile.html
+    ./mustache --data=output.html.json --template=support/templates/html.mustache > myfile.html
 
 Et voilà !
 
@@ -78,3 +78,10 @@ for
     [[[label=script1|caption=My script that works|language=smalltalk
     self foo bar
     ]]]
+
+## Bibliographie
+
+Cassou D. Ducasse S. Fabresse L. Fabry J. Caekenberghe S. V., 2016,*Documenting and Presenting
+with Pillar* , in Enterprise Pharo a Web Perspective, p 209-232.
+
+Ducasse S. and Polito G., 2017, [Publishing Documents with Pillar 7.0](https://github.com/SquareBracketAssociates/Booklet-PublishingAPillarBooklet), Square Bracket tutorials
