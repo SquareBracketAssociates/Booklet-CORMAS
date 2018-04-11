@@ -62,9 +62,9 @@ As the model is purely theoretical, the step duration is not defined. In one ste
 
 !! Adapting ECEC to CORMAS Framework
 
-The following diagram is an adaptation of the main class diagram (in design stage, see Figure 2) to fit the Cormas framework.
+The following diagram is an adaptation of the main class diagram (in design stage, see Figure *@uml*) to fit the Cormas framework.
 
-+UML class diagram, adapted to Cormas (implementation stage)>file://figures/uml_cormas.png|width=100|label=sigmoth+
++UML class diagram, adapted to Cormas (implementation stage)>file://figures/uml_cormas.png|width=100|label=umlCormas+
 
 ECEC defines 3 kinds of entities: Plants, RestrainedForagers and UnrestrainedForagers.
 
@@ -80,17 +80,30 @@ Because based on Pharo Smalltalk, Cormas is a cross-platform software that can d
 
 !!! Opening CORMAS
 
+For linux user ==./pharo cormas.image==.
 
 !!! Creating a new CORMAS Model
-[[[
-CormasModel subclass: #ECEC
-	instanceVariableNames: ''
-	classVariableNames: ''
-	package: 'ECECCategory'
-]]]
+
+You can create a new model by creating a new package using ''notilus'' (pharo browser). It can be done with a mouse right clik or with a shortcut ==Ctrl+N+P==.
+
++Create a new model>file://figures/cormas_create_package.png|label=newPackage+
 
 !!! Defining a spatial entity: the "VegetationUnit"
+Once you've got a package model, you can iniate to create classes using UML frome fig. *@umlCormas*.
+For exemple, looking for ''vegetationUnit'' it work as fig. *@newclassVeg*:
+
+[[[
+CMSpatialEntityCell subclass: #CMECECVegetationUnitPE
+	instanceVariableNames: 'biomass'
+	classVariableNames: 'K r'
+	package: 'Cormas-Model-ECEC-PE'
+]]]
+
++Create a new class>file://figures/cormas_class.png|label=newclassVeg+
+
 !!! Designing the VegetationUnit Behavior
+
+
 !!!! Setting the parameters of a logistic growth
 
 The logistic equation needs 2 parameters: the carrying capacity "K" and the growth rate "r".
@@ -98,7 +111,14 @@ The logistic equation needs 2 parameters: the carrying capacity "K" and the grow
 As the values of these parameters are equals for each Plant instances, they are defined as class variables.
 !!!! Create the K and r class variables
 
+Using right clik you can access to the refactorisation tool (fig. *@refactI*). And use it, in order to create class variables.
++Generate instance variables>file://figures/refactor_instance_class.png|label=refactI+
+
+It will generate empty variable in ==read== and ==write:== access.
+
 !!!! Create the biomass attribute
+It preaty the same to create instance variable.
+
 !!!! Write a logistic growth method in a new protocol
 
 To code a method, you need to open a browser on the VegetationUnit class. For that, double click on VegetationUnit name of the "entities" interface (or select in the right-click menu, "browse").
