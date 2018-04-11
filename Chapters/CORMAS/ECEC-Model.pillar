@@ -64,17 +64,22 @@ As the model is purely theoretical, the step duration is not defined. In one ste
 
 The following diagram is an adaptation of the main class diagram (in design stage, see Figure 2) to fit the Cormas framework.
 
++UML class diagram, adapted to Cormas (implementation stage)>file://figures/uml_cormas.png|width=100|label=sigmoth+
+
 ECEC defines 3 kinds of entities: Plants, RestrainedForagers and UnrestrainedForagers.
 
-As the plants are spatially located and can't move, we aggregated the plant with the spatial unit in one entity. Thus, a VegetationUnit is a kind of SpatialEntityCell with additional attribute: “biomass”.
+As the plants are spatially located and can't move, we aggregated the plant with the spatial unit in one entity. Thus, a VegetationUnit is a kind of ''SpatialEntityCell'' with additional attribute: “biomass”.
 
-As the foragers are the located agents of ECEC, the Forager class must inherit from AgentLocation abilities, in order to enable the agents to move and to perceive their neighborhoods.
+As the foragers are the located agents of ECEC, the Forager class must inherit from ''AgentLocation'' abilities, in order to enable the agents to move and to perceive their neighborhoods.
 
 !! Implementing ECEC with CORMAS
 
-Because based on Pharo Smalltalk, Cormas is a cross-platform software that can directly run on any platform without special preparation. Thus Cormas and your model should run on Microsoft Windows, Linux and Mac OS X. You can download the new release here: ...
+Because based on Pharo Smalltalk, Cormas is a cross-platform software that can directly run on any platform without special preparation. Thus Cormas and your model should run on Microsoft Windows, Mac OS X and Linux. You can download the new release here: ...
+
+@@todo URL pharo-Cormas
 
 !!! Opening CORMAS
+
 
 !!! Creating a new CORMAS Model
 [[[
