@@ -15,7 +15,7 @@ This model contains two kinds of entities: plants and foragers.
 !!! The Plants
 The Plants are created only once and have a fixed location. They do not move, die or reproduce. A plant's only "behaviors" is to grow (and be eaten by foragers). The plants vary only in their biomass, which represents the amount of food energy available to foragers. At each time unit, this biomass level increases according to a logistic growth curve:
 
-@@todo add math equation.
+@@todo add math equation could be nice.
 
 % fig1 was maid with R script avalable in this repo : script/fig1.R
 +Logistic equation and its sigmoid curves (r = 0.2 and k = 10)>file://figures/fig1.png|width=100|label=sigmoth+
