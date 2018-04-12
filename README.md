@@ -4,8 +4,7 @@
 
 ## Basic notions for GIT
 #### To clone a repository on my HD
-* On your Terminal, go on the folder where to download, then download the project
-
+On your Terminal, go on the folder where to download, then download the project
 
     git clone monURL
 
