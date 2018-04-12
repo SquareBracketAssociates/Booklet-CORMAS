@@ -2,6 +2,17 @@
 
 [![Build Status](https://travis-ci.org/cormas/Booklet-CORMAS.svg?branch=master)](https://travis-ci.org/cormas/Booklet-CORMAS)
 
+## My notes for GIT
+
+    git clone monURL
+
+    git add monFichier
+    git commit -m "mon commentaire"
+    git push origin master
+
+    git pull
+
+
 ## Install pillar on our computer
 Most of the information about pillar are available [here](https://ci.inria.fr/pharo-contribution/job/EnterprisePharoBook/lastSuccessfulBuild/artifact/book-result/PillarChap/Pillar.pdf). But we provide there a quick strater quite in order to compile in PDF/html the book source code.
 
