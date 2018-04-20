@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/cormas/Booklet-CORMAS.svg?branch=master)](https://travis-ci.org/cormas/Booklet-CORMAS)
 
+With this booklet, we try to provide a continuous integration for Cormas "how-to". You can download sources from github or directly the [PDF here](https://github.com/cormas/Booklet-CORMAS/releases/download/untagged-fa949346cca68faab324/book.spiral.pdf).
+
 ## Basic notions for GIT
 #### To clone a repository on my HD
 On your Terminal, go on the folder where to download, then download the project
