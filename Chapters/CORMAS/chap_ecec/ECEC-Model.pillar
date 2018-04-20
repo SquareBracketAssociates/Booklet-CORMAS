@@ -1,4 +1,4 @@
-! Building a Cormas Model from Scratch: ECEC Model
+!! Building a Model from Scratch: ECEC Model
 
 The model we present here and that you will build is inspired from a paper by Pepper and Smuts: "*Evolution of Cooperation in an Ecological Context>https://www.researchgate.net/profile/John_Pepper3/publication/247870731_The_evolution_of_cooperation_in_an_ecological_context_An_agent-based_model/links/00b4952aafdf270b02000000/The-evolution-of-cooperation-in-an-ecological-context-An-agent-based-model.pdf*".
 
@@ -6,21 +6,21 @@ The model consists of a 2 dimensional grid, wrapped in both axes to avoid edge e
 
 This ECEC model can be found in the github repository here: ...
 
-@@todo Don't foget URL to github. PLOP
+@@todo Don't foget URL to github.
 
-!! Model description
+!!! Basic description
 
 This model contains two kinds of entities: plants and foragers.
 
-!!! The Plants
-The Plants are created only once and have a fixed location. They do not move, die or reproduce. A plant's only "behaviors" is to grow (and be eaten by foragers). The plants vary only in their biomass, which represents the amount of food energy available to foragers. At each time unit, this biomass level increases according to a logistic growth curve:
+!!!! The Plants
+The Plants are created only once and have a fixed location. They do not move, die or reproduce. A plant's only "behaviors" is to grow (and be eaten by foragers). The plants vary only in their biomass, which represents the amount of food energy available to foragers. At each time unit, this biomass level increases according to a logistic growth curve on fig. *@sigmoth*
 
 @@todo add math equation could be nice.
 
 % fig1 was maid with R script avalable in this repo : script/fig1.R
 +Logistic equation and its sigmoid curves (r = 0.2 and k = 10)>file://figures/fig1.png|width=100|label=sigmoth+
 
-!!!The Foragers
+!!!! The Foragers
 Each step, the Foragers burn energy according to their catabolic rate. This rate is the same for all foragers. It is fixed to 2 units of energy per time period.
 
 A forager feeds on the plant in its current location if there is one. It increases its own energy by reducing the same amount of the plant. Foragers are of two types that differs in their feeding behavior:
@@ -31,13 +31,13 @@ In constrast, "Unrestrained" foragers eat 99% of the plant. This harvest rate is
 
 The Foragers do not change their feeding behavior type and their offspring keep the same heritable traits.
 
-!!!! Rules for Foragers' Movements
+""Rules for Foragers' Movements""
 
 Foragers examine their current location and around. From those not occupied by another forager, they choose the one containing the plant with the highest energy.
 
 If the chosen plant would yield enough food to meet their catabolic rate they move there. If not, they move instead to a randomly chosen adjacent free place (not occupied by another forager). This movement rule leads to the emigration of foragers from depleted patches, and simulates the behavior of individuals exploiting local food sources while they last, but migrating rather than starving in an inadequate food patch.
 
-!!!! Other Biological Functions of Foragers
+!!!!! Other Biological Functions of Foragers
 
 Foragers loose energy (catabolic rate, 2 points) regardless of whether or not they move.
 
@@ -60,7 +60,7 @@ The following Sequence Diagram presents the main time step of ECEC. This is a DT
 
 As the model is purely theoretical, the step duration is not defined. In one step, all entities should evolve: the plants increase their biomass (according to Logistic equation), and the foragers perform their biological functions. In order not to give always preference to the same agents (the privilege to choose first the best plant), the list of the foragers is randomly mixed at each step.
 
-!! Adapting ECEC to CORMAS Framework
+!!! Adapting ECEC to CORMAS Framework
 
 The following diagram is an adaptation of the main class diagram (in design stage, see Figure *@uml*) to fit the Cormas framework.
 
@@ -72,23 +72,23 @@ As the plants are spatially located and can't move, we aggregated the plant with
 
 As the foragers are the located agents of ECEC, the Forager class must inherit from ''AgentLocation'' abilities, in order to enable the agents to move and to perceive their neighborhoods.
 
-!! Implementing ECEC with CORMAS
+!!!! Implementing ECEC with CORMAS
 
 Because based on Pharo Smalltalk, Cormas is a cross-platform software that can directly run on any platform without special preparation. Thus Cormas and your model should run on Microsoft Windows, Mac OS X and Linux. You can download the new release here: ...
 
 @@todo URL pharo-Cormas
 
-!!! Opening CORMAS
+!!!! Opening CORMAS
 
 For linux user ==./pharo cormas.image==.
 
-!!! Creating a new CORMAS Model
+!!!! Creating a new CORMAS Model
 
 You can create a new model by creating a new package using ''notilus'' (pharo browser). It can be done with a mouse right clik or with a shortcut ==Ctrl+N+P==.
 
 +Create a new model>file://figures/cormas_create_package.png|label=newPackage+
 
-!!! Defining a spatial entity: the "VegetationUnit"
+!!!! Defining a spatial entity: the "VegetationUnit"
 Once you've got a package model, you can iniate to create classes using UML frome fig. *@umlCormas*.
 For exemple, looking for ''vegetationUnit'' it work as fig. *@newclassVeg*:
 
@@ -101,25 +101,25 @@ CMSpatialEntityCell subclass: #CMECECVegetationUnitPE
 
 +Create a new class>file://figures/cormas_class.png|label=newclassVeg+
 
-!!! Designing the VegetationUnit Behavior
+!!!! Designing the VegetationUnit Behavior
 
 
-!!!! Setting the parameters of a logistic growth
+!!!!! Setting the parameters of a logistic growth
 
 The logistic equation needs 2 parameters: the carrying capacity "K" and the growth rate "r".
 
 As the values of these parameters are equals for each Plant instances, they are defined as class variables.
-!!!! Create the K and r class variables
+!!!!! Create the K and r class variables
 
 Using right clik you can access to the refactorisation tool (fig. *@refactI*). And use it, in order to create class variables.
 +Generate instance variables>file://figures/refactor_instance_class.png|label=refactI+
 
 It will generate empty variable in ==read== and ==write:== access.
 
-!!!! Create the biomass attribute
+!!!!! Create the biomass attribute
 It preaty the same to create instance variable.
 
-!!!! Write a logistic growth method in a new protocol
+!!!!! Write a logistic growth method in a new protocol
 
 To code a method, you need to open a browser on the VegetationUnit class. For that, double click on VegetationUnit name of the "entities" interface (or select in the right-click menu, "browse").
 
@@ -144,7 +144,7 @@ Then accept this code: right button "Accept" or Ctrl S.
 
 The logisticGrowth method uses a class method from Cormas class (#logisticGrowth:r:K:).
 
-!!!! Write the basic step method in the "control" protocol
+!!!!! Write the basic step method in the "control" protocol
 
 In the same way as previously, create a new protocol called control and the #step method in it.
 
@@ -153,7 +153,7 @@ step
    self logisticGrowth
 ]]]
 
-!!!! Write a random init method in the “init” protocol
+!!!!! Write a random init method in the “init” protocol
 
 In the same way as previously, create a new protocol called init and the #initRandomBiomass method in it.
 
@@ -165,7 +165,7 @@ initRandomBiomass
 
 You can now close the browser of "VegetationUnit".
 
-!!! Designing an agent foraging the resource
+!!!! Designing an agent foraging the resource
 
 Let us define the Forager agent as a kind of situated agent. On the "Spatial" panel of entities interface, click on the plus button.
 
@@ -176,15 +176,15 @@ As we will redefine 2 sub-classes, clik on "Yes".
 
 Then, as you can see in a new browser, Forager class inherits from AgentLocation.
 
-!!! Setting the attributes of the foragers
+!!!! Setting the attributes of the foragers
 The values of these parameters are equals for each agent. We can define them as class variables as describe in the class diagram (Figure 2).
 
-!!!! Create the new class variables: fertilityThreshold, catabolicRate and harvestRate
+!!!!! Create the new class variables: fertilityThreshold, catabolicRate and harvestRate
 
-!!! Create two sub-classes of Forager
+!!!! Create two sub-classes of Forager
 As designed in the class diagram, Forager is specialized in two sub-classes: Restrained and Unrestrained. Because Forager is a class of our model, there is another procedure to create specialized classes: in “entities” interface, select Forager then right click on it and select "specialize".
 
-!!! Coding the biological methods of Forager
+!!!! Coding the biological methods of Forager
 
 Similarly to the Logistic growth of VegetationUnit, we have to code the biological methods of the foragers. As described in the main class diagram, these methods are equals for both subtypes of foragers. Thus, they have to be defined at Forager level.
 
@@ -243,7 +243,7 @@ die
 
 Due to the new diagram editor, there are two ways to design the main behavior: by coding in Smalltalk or by creating an activity diagram. The diagram editor will be presented latter (add a ref here).
 
-!!Observe the entities
+!!!!Observe the entities
 
-!!! Assigning a green intensity to the energy level of the plant
-!!!! Add a "point of view" method named povBiomass
+!!!!! Assigning a green intensity to the energy level of the plant
+!!!!! Add a "point of view" method named povBiomass

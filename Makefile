@@ -1,6 +1,7 @@
 MAIN = book
 CHAPTERS = \
-	Chapters/CORMAS/ECEC-Model \
+	Chapters/CORMAS/chap_fireman/Fireman-Model \
+	Chapters/CORMAS/chap_ecec/ECEC-Model \
 
 
 OUTPUTDIRECTORY = build

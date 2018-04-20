@@ -1,4 +1,9 @@
+%%This file content a preface all '.pillar' fille for each chapters
+%% Chapters are ordered like expected in the book
+
+Based on feedback from experienced research and teaching.
 
 
-${inputFile:Chapters/CORMAS/ECEC-Model.pillar}$
-
+${inputFile:Chapters/CORMAS/chap_modelling_guide/modelling_guide_general.pillar}$
+${inputFile:Chapters/CORMAS/chap_fireman/Fireman-Model.pillar}$
+${inputFile:Chapters/CORMAS/chap_ecec/ECEC-Model.pillar}$
