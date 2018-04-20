@@ -6,4 +6,12 @@ before_install:
   - docker pull dpollet/texlive:pillar
 
 script:
-  - docker run --tty --rm --volume $PWD:/work dpollet/texlive:pillar make spiralbook
+- docker run --tty --rm --volume $PWD:/work dpollet/texlive:pillar bash -c "make spiralbook"
+deploy:
+  provider: releases
+  api_key:
+    secure: bS2fE4h1A5QVhbydw/BLwupkLL5wzSrLsdHoDklUFEM3Zs0WruHGbztR/nwYRejn7HLn0UaYN2bkC0adAlOTo9a2IAXVlDJ8Lx3zeJ82XheMONS6Ey0Mr3U5wHiM4a0/JtwL8/rMeAJwwSCekjdUn7v5b2s/iCNbfyfJLSBElvkj+Z3q59sxnbiwCaFLJSEOhJTKNwR3OBtP/58QZTkCGuXsB4MtkfFsbjGsKf35mCAkscgp7eGfyhwFxBdeKKjiWpBWsu0fm6x3U0dEL8HNKeaarHAmNrc2VPzp2AZQvzeKX+tkuRP/KwgDMEKXdM+Qt9YTXnkzGM6F6qFbBE+ibptQ/auZIDf1wl9nfA9YWq+k6O/z4Loc/nzL9M4pkVKstYIOR1lgvk+0PyTiMqKiDKiZcVM1YY2m6NktrOM9D7ics8aXR/rmdWSS8TRu7/ZM8RQeI+vsyW8X1SHw+sLQzyByNIl62pyFLqD3I2skpg5wHlxf2kzryTvMK4a1zJ2ZBRbpvybLm/rCeDc5dDWl4TGWk2KCeRFjntWBohaqK7N62BYZfuaKYOQ213/FCwAQ22JSijieXe7uFWqd7RqXDZDcbSaoNPcstT6D1X2Vdfppyd8ZHXqm9VWW9M/Y+5q2aeek+IlWC2EuAPAbfj3c3iREP9BW3CZh7dxrY45XPIc=
+  file: 'build/book.spiral.pdf'
+  skip_cleanup: true
+  on:
+repo: ElCep/Booklet-CORMAS
