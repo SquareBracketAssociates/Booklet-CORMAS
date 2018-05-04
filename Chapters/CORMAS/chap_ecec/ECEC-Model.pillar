@@ -15,7 +15,7 @@ This model contains two kinds of entities: plants and foragers.
 !!!! The Plants
 The Plants are created only once and have a fixed location. They do not move, die or reproduce. A plant's only "behaviors" is to grow (and be eaten by foragers). The plants vary only in their biomass, which represents the amount of food energy available to foragers. At each time unit, this biomass level increases according to a logistic growth curve on fig. *@sigmoth*
 
-@@todo add math equation could be nice.
+@@todo add math equation could be nice
 
 % fig1 was maid with R script avalable in this repo : script/fig1.R
 +Logistic equation and its sigmoid curves (r = 0.2 and k = 10)>file://figures/fig1.png|width=100|label=sigmoth+
@@ -93,33 +93,84 @@ Once you've got a package model, you can iniate to create classes using UML from
 For exemple, looking for ''vegetationUnit'' it work as fig. *@newclassVeg*:
 
 [[[
-CMSpatialEntityCell subclass: #CMECECVegetationUnitPE
+CMSpatialEntityCell subclass: #CMECECVegetationUnit
 	instanceVariableNames: 'biomass'
 	classVariableNames: 'K r'
-	package: 'Cormas-Model-ECEC-PE'
+	package: 'Cormas-Model-ECEC'
 ]]]
 
 +Create a new class>file://figures/cormas_class.png|label=newclassVeg+
 
 !!!! Designing the VegetationUnit Behavior
-
-
 !!!!! Setting the parameters of a logistic growth
 
-The logistic equation needs 2 parameters: the carrying capacity "K" and the growth rate "r".
+The logistic equation needs 2 parameters: the carrying capacity "k" and the growth rate "r".
 
 As the values of these parameters are equals for each Plant instances, they are defined as class variables.
 !!!!! Create the K and r class variables
 
-Using right clik you can access to the refactorisation tool (fig. *@refactI*). And use it, in order to create class variables.
+Using right clik you can access to the refactorisation tool (fig. *@refactI*). And use it, in order to create class variables accessors.
 +Generate instance variables>file://figures/refactor_instance_class.png|label=refactI+
 
-It will generate empty variable in ==read== and ==write:== access.
+It will generate empty variable in == read == and == write: == access.
+As you can see for access to a variable the accessor us == : == .
+An accessor readable is defined ""without"" == : ==
+In order to intiate == k == you can defined it as :
+
+[[[
+K
+
+	^K ifNil: [K := 10]
+]]]
+This lasy defintion say : if k is == null == our model use == K := 10 ==.
+To be able to write/update == k == you can conserve the preformated variable description.
+
+[[[
+K: anObject
+	K := anObject
+]]]
+
+For == r == you can proced as well
+
+[[[
+r
+
+	^r ifNil: [r := 0.2]
+]]]
+
+And
+
+[[[
+r: anObject
+	"Setter accessor of attribute r "
+
+	r := anObject
+]]]
+
 
 !!!!! Create the biomass attribute
-It preaty the same to create instance variable.
+It preaty the same to create instance variable. You can defined
+
+[[[
+biomass
+	"Getter accessor with default value = 0 "
+
+	^biomass ifNil: [biomass := 0]
+]]]
+
+and
+
+[[[
+biomass: anObject
+	"Setter accessor of attribute biomass "
+
+	biomass = anObject ifTrue: [^nil].	"for optimization"
+	biomass := anObject.
+	self changed
+]]]
 
 !!!!! Write a logistic growth method in a new protocol
+@sectionBiologie
 
 To code a method, you need to open a browser on the VegetationUnit class. For that, double click on VegetationUnit name of the "entities" interface (or select in the right-click menu, "browse").
 
@@ -146,7 +197,7 @@ The logisticGrowth method uses a class method from Cormas class (#logisticGrowth
 
 !!!!! Write the basic step method in the "control" protocol
 
-In the same way as previously, create a new protocol called control and the #step method in it.
+In the same way as previously, create a new protocol of instance variable called "control" and the #step method in it.
 
 [[[
 step
@@ -167,28 +218,63 @@ You can now close the browser of "VegetationUnit".
 
 !!!! Designing an agent foraging the resource
 
-Let us define the Forager agent as a kind of situated agent. On the "Spatial" panel of entities interface, click on the plus button.
+Let us define the Forager agent as a kind of situated agent. As previously you can create it as :
 
-As the foragers are located, the Forager class must inherit from AgentLocation. Thus, select
-the “Location” button. When clicking “OK”, a message pops up, asking if Forager is abstract:
+[[[
+CMAgentLocation subclass: #CmEcecForager
+	instanceVariableNames: 'energy'
+	classVariableNames: 'cataboliticRate fertilityThreshold harvestRate'
+	package: 'Cormas-Model-myModel'
+]]]
 
-As we will redefine 2 sub-classes, clik on "Yes".
+As the foragers are located, the Forager class must inherit from CMAgentLocation. Our == #CmEcecForager == class will be a super class, but before create subclasses we will defined generic methods. As for ''VegetationUnit'' you can create accessor with the "right clik" using the refactorisation tool.
 
-Then, as you can see in a new browser, Forager class inherits from AgentLocation.
+!!!!! Setting the attributes of the foragers
+The values of these parameters are equals for each agent. We can define them as class variables as describe in the class diagram.
 
-!!!! Setting the attributes of the foragers
-The values of these parameters are equals for each agent. We can define them as class variables as describe in the class diagram (Figure 2).
+You mostly need to modified accessors in == read ==. == write == accessors can stay as configured by default.
 
-!!!!! Create the new class variables: fertilityThreshold, catabolicRate and harvestRate
+[[[
+catabolicRate
+	"Getter accessor with default value = 2 "
+
+	^ catabolicRate ifNil: [catabolicRate := 2]
+]]]
+
+[[[
+fertilityThreshold
+	"Getter accessor with default value = 100 "
+
+	^ fertilityThreshold ifNil: [fertilityThreshold := 100]
+]]]
+
+[[[
+harvestRate
+	^ harvestRate
+]]]
 
 !!!! Create two sub-classes of Forager
-As designed in the class diagram, Forager is specialized in two sub-classes: Restrained and Unrestrained. Because Forager is a class of our model, there is another procedure to create specialized classes: in “entities” interface, select Forager then right click on it and select "specialize".
+As designed in the class diagram, Forager is specialized in two sub-classes: Restrained and Unrestrained. Because Forager is a class of our model.
+
+[[[
+CmEcecForager subclass: #CmEcecRestrained
+	instanceVariableNames: ''
+	classVariableNames: 'harvestRaste'
+	package: 'Cormas-Model-myModel'
+]]]
+
+[[[
+CmEcecForager subclass: #CmEcecUnRestrained
+	instanceVariableNames: ''
+	classVariableNames: 'harvestRaste'
+	package: 'Cormas-Model-myModel'
+]]]
 
 !!!! Coding the biological methods of Forager
 
-Similarly to the Logistic growth of VegetationUnit, we have to code the biological methods of the foragers. As described in the main class diagram, these methods are equals for both subtypes of foragers. Thus, they have to be defined at Forager level.
+Similarly to the Logistic growth of VegetationUnit, we have to code the biological methods at the foragers level. As described in the main class diagram, these methods are equals for both subtypes of foragers. Thus, they have to be defined at superClasse Forager level.
 
-Edit the Forager class and create “biology” protocol (see chapter 3.4.2, Write a logistic growth method in a new protocol, page 16). Then write the following methods.
+Edit the Forager class and create “biology” protocol (see the logisticGrowth methode in *@sectionBiologie*). Then write the following methods.
 
 [[[
 consumeEnergy
@@ -240,10 +326,9 @@ die
 	self dead: true
 ]]]
 
+!!!! Create an orchestra conductor (scheduler)
 
-Due to the new diagram editor, there are two ways to design the main behavior: by coding in Smalltalk or by creating an activity diagram. The diagram editor will be presented latter (add a ref here).
-
-!!!!Observe the entities
+!!!! Observe the entities - create a world
 
 !!!!! Assigning a green intensity to the energy level of the plant
 !!!!! Add a "point of view" method named povBiomass
