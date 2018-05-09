@@ -214,6 +214,28 @@ initBiomassRandomly
    self biomass: (Cormas randomFloatFrom: 0.01 to: 0.5)
 ]]]
 
+!!!!! Assigning a green intensity to the energy level of the plant
+
+At the end of this chapter we want to use a color gradient in order to inform on the biomass avalable in each cell of our grid. For that you need to initialize a color pallete as a class variable
+
+[[[
+pallete
+
+	^ pallete ifNil: [ pallete := RTMultiLinearColor new
+		colors: (RTColorPalette sequential colors: 9 scheme: 'YlGnBu') ].
+]]]
+
+Once is done you need to create also a class method usinf === pallete ===. It done here :
+
+[[[
+pov
+
+	^ self class pallete
+		rtValue: (self biomass / 10.0)
+]]]
+
+!!!!! Add a "point of view" method named povBiomass
+
 You can now close the browser of "VegetationUnit".
 
 !!!! Designing an agent foraging the resource
@@ -391,13 +413,21 @@ theCmEcecVegetationUnits
 
 In this case == theMyEntitys == is a way for your #modelClass to dialogue with each entity of your model.
 
-You also needs to provide an == init == how will defined at the instance level , how to initialize the simulation.
+You also needs to provide an == init == how will defined at the instance level , how to initialize the simulation. We defined init in two times. First the landscape and after agents. Process like this, you can be a little bit more generic if you want to change the wait to initialize the grid.
 
 [[[
-init
-	"create space and populate with restraineds and unrestraineds"
+initLandscaspe
+	"create space and inject biomass in each cells"
 	self createGridX: 15 Y: 27 neighbourhood: 8 closed: true.
 	self theCmEcecVegetationUnits do: [ :c |  c initBiomassRandomly].
+]]]
+
+[[[
+initStandard
+	"create space and populate with restraineds and unrestraineds"
+	self initLandscape.
+	self createN: 10 randomlyLocatedEntities: CMECECUnRestrainedEP.
+	self createN: 10 randomlyLocatedEntities: CMECECRestrainedEP
 ]]]
 
 Here we defined our grid (space) with dimension and Moore neigbourhood (8, but you can also defined a von Neumann neighborhood).
@@ -417,28 +447,25 @@ step: t
 ]]]
 
 !!!! Observe the entities - create a world
-A nice way to proceed by mands is to build a small DSL (Domain specific language) in order to facilite our interaction with simulation.
+Now you need to orchestrate all thos bricks. It's time to see somthing ! Steel in the  === CmEcecCModel === class you can create a class method called === exemple ===.
 
-In #CmEcecCModel you can create a new class method.
++You can run exemple clicking on the green arrow near to the method name>file://figures/run_exemple.png|label=runExemple+
 
-[[[
-newWithProgrammableScenario
-
-	^ self
-		defaultInit: #initWithProgrammableScenario;
-		initialize;
-		new.
-]]]
-
-and a new instance method
 
 [[[
-initWithProgrammableScenario
+example
 
-	self initCells: #initWith: withArguments: {percentageOfTrees}.
-	1 to: numberOfFires do: [:i | self pickCell state: #fire].
-	self initAgents.
+	| aModel |
+	aModel := self initialize new.
+	"enregistre les noms des 2 methodes pour initialiser et faire tourner le modele"
+	aModel activeInit: #initStandard ; activeControl: #step:.
+	aModel initSimulation.
+	(CMPharoGridSimulation new
+		on: aModel
+		withCells: aModel theESE
+		withSituatedEntities: aModel allTheSituatedEntities) runAndVisualize
 ]]]
 
-!!!!! Assigning a green intensity to the energy level of the plant
-!!!!! Add a "point of view" method named povBiomass
+Each method called === exemple === will be executable in ''pharo'' (fig. *@runExemple*). To do it you only have to click on the green arrow and it will run your model (fig. *@runECEC*).
+
++The ECEC model running in Cormas>file://figures/ececmodel.png|label=runECEC+
