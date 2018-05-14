@@ -6,3 +6,10 @@
 /mustache
 /pharo-vm/
 /build/
+
+*.aux
+*.fdb_latexmk
+*.log
+*.pdf
+*.synctex.gz
+*.fls
