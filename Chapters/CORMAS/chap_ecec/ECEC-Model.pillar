@@ -6,7 +6,7 @@ The model consists of a 2 dimensional grid, wrapped in both axes to avoid edge e
 
 This ECEC model can be found in the github repository here: ...
 
-@@todo Don't foget URL to github.
+@@todo Don't forget URL to github.
 
 !!! Basic description
 
@@ -18,7 +18,7 @@ The Plants are created only once and have a fixed location. They do not move, di
 +Logistic equation (r = 0.2 and k = 10)>file://figures/equation_log.png|width=35%|label=equationLog+
 
 
-% fig1 was maid with R script avalable in this repo : script/fig1.R
+% fig1 was maid with R script available in this repo : script/fig1.R
 +Logistic equation and its sigmoid curves (r = 0.2 and k = 10)>file://figures/fig1.png|width=100|label=sigmoth+
 
 !!!! The Foragers
@@ -90,7 +90,7 @@ You can create a new model by creating a new package using ''notilus'' (pharo br
 +Create a new model>file://figures/cormas_create_package.png|label=newPackage+
 
 !!!! Defining a spatial entity: the "VegetationUnit"
-Once you've got a package model, you can iniate to create classes using UML frome fig. *@umlCormas*.
+Once you've got a package model, you can start to create classes using UML from fig. *@umlCormas*.
 For exemple, looking for ''vegetationUnit'' it work as fig. *@newclassVeg*:
 
 [[[
@@ -110,20 +110,20 @@ The logistic equation needs 2 parameters: the carrying capacity "k" and the grow
 As the values of these parameters are equals for each Plant instances, they are defined as class variables.
 !!!!! Create the K and r class variables
 
-Using right clik you can access to the refactorisation tool (fig. *@refactI*). And use it, in order to create class variables accessors.
+Using right clik you can access to the refactoring tool (fig. *@refactI*). And use it, in order to create class variables accessors.
 +Generate instance variables>file://figures/refactor_instance_class.png|label=refactI+
 
 It will generate empty variable in == read == and == write: == access.
 As you can see for access to a variable the accessor us == : == .
 An accessor readable is defined ""without"" == : ==
-In order to intiate == k == you can defined it as :
+In order to initiate == k == you can defined it as :
 
 [[[
 K
 
 	^K ifNil: [K := 10]
 ]]]
-This lasy defintion say : if k is == null == our model use == K := 10 ==.
+This lazy definition say : if k is == null == our model use == K := 10 ==.
 To be able to write/update == k == you can conserve the preformated variable description.
 
 [[[
@@ -131,7 +131,7 @@ K: anObject
 	K := anObject
 ]]]
 
-For == r == you can proced as well
+For == r == you can proceed as well
 
 [[[
 r
@@ -150,7 +150,7 @@ r: anObject
 
 
 !!!!! Create the biomass attribute
-It preaty the same to create instance variable. You can defined
+It's pretty the same for creating  instance variable. You can define:
 
 [[[
 biomass
@@ -217,7 +217,7 @@ initBiomassRandomly
 
 !!!!! Assigning a green intensity to the energy level of the plant
 
-At the end of this chapter we want to use a color gradient in order to inform on the biomass avalable in each cell of our grid. For that you need to initialize a color pallete as a class variable
+At the end of this chapter we want to use a color gradient in order to inform on the biomass available in each cell of our grid. For that you need to initialize a color pallete as a class variable
 
 [[[
 pallete
@@ -226,7 +226,7 @@ pallete
 		colors: (RTColorPalette sequential colors: 9 scheme: 'YlGnBu') ].
 ]]]
 
-Once is done you need to create also a class method usinf === pallete ===. It done here :
+Once is done you need to create also a class method using === pallete ===. It done here :
 
 [[[
 pov
@@ -250,7 +250,7 @@ CMAgentLocation subclass: #CmEcecForager
 	package: 'Cormas-Model-myModel'
 ]]]
 
-As the foragers are located, the Forager class must inherit from CMAgentLocation. Our == #CmEcecForager == class will be a super class, but before create subclasses we will defined generic methods. As for ''VegetationUnit'' you can create accessor with the "right clik" using the refactorisation tool.
+As the foragers are located, the Forager class must inherit from CMAgentLocation. Our == #CmEcecForager == class will be a super class, but before create subclasses we will defined generic methods. As for ''VegetationUnit'' you can create accessor with the "right clik" using the refactoring tool.
 
 !!!!! Setting the attributes of the foragers
 The values of these parameters are equals for each agent. We can define them as class variables as describe in the class diagram.
@@ -375,7 +375,7 @@ step
 
 !!!! Create an orchestra conductor (scheduler)
 
-You need to create a new class how will conduct all experients
+You need to create a new class how will conduct all experiments
 
 [[[
 CormasModel subclass: #CmEcecCModel
@@ -386,7 +386,7 @@ CormasModel subclass: #CmEcecCModel
 
 Once it's done you can generate accessors for == theCmEcecRestraineds theCmEcecUnRestraineds theCmEcecVegetationUnits == as usual (click right -> refactoring -> instance var refactoring). It will create 6 methods in a accessing protocol.
 
-And as usual you need change == read == method and provide a lasy initialisation.
+And as usual you need change == read == method and provide a lazy initialization.
 
 [[[
 theCmEcecRestraineds
@@ -431,7 +431,7 @@ initStandard
 	self createN: 10 randomlyLocatedEntities: CMECECRestrainedEP
 ]]]
 
-Here we defined our grid (space) with dimension and Moore neigbourhood (8, but you can also defined a von Neumann neighborhood).
+Here we defined our grid (space) with dimension and Moore neighbourhood (8, but you can also defined a von Neumann neighborhood).
 
 For each cells stock in == c == temporary and use == initBiomassRandomly == method from == CmEcecVegetationUnit == class.
 
@@ -440,15 +440,15 @@ You need to provide a time definition in a == step: == method.
 [[[
 step: t
 	"main step: activation of all the plants (Resource dynamics), then activation of the foragers (Agents dynamics)"
-	"Resource dynamics   (because the dynamics of the plants are independants, the activation is not mixted)"
+	"Resource dynamics   (because the dynamics of the plants are independents, the activation is not mixed)"
 	self stepEntities: self theCmEcecVegetationUnits.
 
-	"Agents dynamics    (because the agents may compete for plant access, the activation is randomly mixted)"
+	"Agents dynamics    (because the agents may compete for plant access, the activation is randomly mixed)"
 	self askRandom: CmEcecForager toDo: #step.
 ]]]
 
 !!!! Observe the entities - create a world
-Now you need to orchestrate all thos bricks. It's time to see somthing ! Steel in the  === CmEcecCModel === class you can create a class method called === exemple ===.
+Now you need to orchestrate all those bricks. It's time to see something ! Steel in the  === CmEcecCModel === class you can create a class method called === exemple ===.
 
 +You can run exemple clicking on the green arrow near to the method name>file://figures/run_exemple.png|label=runExemple+
 
@@ -458,15 +458,15 @@ example
 
 	| aModel |
 	aModel := self initialize new.
-	"enregistre les noms des 2 methodes pour initialiser et faire tourner le modele"
+	"define the names of the 2 methods used to init and to run the simulation"
 	aModel activeInit: #initStandard ; activeControl: #step:.
 	aModel initSimulation.
-	(CMPharoGridSimulation new
+	(CMSimulationGrid new
 		on: aModel
 		withCells: aModel theESE
 		withSituatedEntities: aModel allTheSituatedEntities) runAndVisualize
 ]]]
 
-Each method called === exemple === will be executable in ''pharo'' (fig. *@runExemple*). To do it you only have to click on the green arrow and it will run your model (fig. *@runECEC*).
+Each method called === example === will be executable in ''pharo'' (fig. *@runExemple*). To do it you only have to click on the green arrow and it will run your model (fig. *@runECEC*).
 
 +The ECEC model running in Cormas>file://figures/ececmodel.png|label=runECEC+
