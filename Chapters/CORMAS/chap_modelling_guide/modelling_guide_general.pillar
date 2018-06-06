@@ -30,7 +30,7 @@ Simulation window > Button 3 : Run the simulation until the final step (the simu
 Simulation window > Field A : Current time step of the simulation (cannot be edited)
 Simulation window > Field B : Final step of the simulation (can be edited by the user)
 
-!!!! Launch a simulation and follow it run using the probes chart view
+!!!! Launch a simulation and follow it run using the probes chart window
 1/ Define a scenario and initialize the simulation
 Click the Initiliaze button (n°1 in fig. *@simulationWindow*).
 
@@ -50,10 +50,9 @@ The simulation is now initialize. The current time step is zero. The simulation 
 
 Launch the simulation either using 'Step by step' button (n°2 in fig. *@simulationWindow*') or by using the run button (n°3 in fig. *@simulationWindow*').
 
-To open the probes chart view select 'Visualization>Probes' from Cormas-UI main window. 
+To open the probes chart window select 'Visualization>Probes' from Cormas-UI main window. 
 
-
-
+The chart window is updated at each step and reset when the simulation is re-initialized.
 
 
 
