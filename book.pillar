@@ -7,6 +7,6 @@ Based on feedback from experienced research and teaching.
 ${inputFile:Chapters/CORMAS/chap_modelling_guide/modelling_guide_general.pillar}$
 ${inputFile:Chapters/CORMAS/chap_fireman/Fireman-Model.pillar}$
 ${inputFile:Chapters/CORMAS/chap_ecec/ECEC-Model.pillar}$
-${inputFile:Chapters/CORMAS/chap_a_larger_example/a_larger_example.pillar}$
+%%${inputFile:Chapters/CORMAS/chap_a_larger_example/a_larger_example.pillar}$
 ${inputFile:Chapters/CORMAS/chap_testing_debugging_profiling_versionning/testing_debugging_profiling_versionning.pillar}$
 ${inputFile:Chapters/CORMAS/chap_index/index.pillar}$
