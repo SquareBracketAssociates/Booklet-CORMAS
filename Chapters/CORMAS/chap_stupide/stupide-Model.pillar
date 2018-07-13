@@ -11,16 +11,16 @@ In this chapter we will follow exactly the scheduler propose in the original pap
 !!! Step 1: a grid and some bugs
 
 !!!! Create a package and somes classes
-Before starting we need to create, a new package for our model. Create a package is made with a rigth click in the interface package part (*@createPackage*).
+Before starting we need to create, a new package for our model. Create a package is made with a right click in the interface package part (*@createPackage*).
 
-+Create a empty package for your new model>file://figures//home/delaye/github/Cormas/Booklet-CORMAS/Chapters/CORMAS/chap_stupide/figures/createPackage.png|width=60%|label=createPackage+
++Create an empty package for your new model>file://figures//home/delaye/github/Cormas/Booklet-CORMAS/Chapters/CORMAS/chap_stupide/figures/createPackage.png|width=60%|label=createPackage+
 
 
-In this empty package you can add 3 classes (e.g. *@stupidUML*) : CMStupidCell (for grid cells), CMStupidAgent, CMStupidModel (as scheduler), using the same method (rigth clik) but this time in the class parte (*@createclasses*). And copy the code below.
+In this empty package you can add 3 classes (e.g. *@stupidUML*) : CMStupidCell (for grid cells), CMStupidAgent, CMStupidModel (as schedulers), using the same method (rigth clik) but this time in the class part (*@createclasses*). And copy the code below.
 
 +Create class>file://figures//home/delaye/github/Cormas/Booklet-CORMAS/Chapters/CORMAS/chap_stupide/figures/createClasses.png|width=60%|label=createclasses+
 
-It look like that for CMStupidCell
+It looks like that for CMStupidCell
 
 [[[
 CMSpatialEntityCell subclass: #CMStupideCell
@@ -47,11 +47,11 @@ CormasModel subclass: #CMStupideModel
   package: 'Cormas-Model-myStupide'
 ]]]
 
-In this last Class declaration, ==theCMStupideCells== and ==theCMStupideAgents== are build adding ==the== at the begining and ==s== at the end. This instance variable will acced to a list of the concerned entity.
+In this last class declaration, ==theCMStupideCells== and ==theCMStupideAgents== are built adding ==the== at the beginning and ==s== at the end. This instance variable will accede to a list of the concerned entities.
 
 !!!! Methods for StupideCell
 
-At this step you just need one instance method of the pov (point of view). If you whant to visualize some object CORMAS is waiting at least a color.
+At this step you just need one instance method of POV (point of view). If you want to visualize some object CORMAS is waiting at least a color.
 
 [[[
 pov
@@ -60,7 +60,7 @@ pov
 
 !!!! Methods for CMStupidAgent
 
-Your stupid agent also need instance methods. But more than one.
+Your stupid agent also needs instance methods. But more than one.
 
 We want than our agent will be able to move so :
 
@@ -73,7 +73,7 @@ move
 		].
 ]]]
 
-As for cell, if you want to visualize you agents, you need to specifie their colors :
+As for cell, if you want to visualize your agents, you need to specify their colors :
 
 [[[
 pov
@@ -81,7 +81,7 @@ pov
 	^ Color blue
 ]]]
 
-And you can add a dummy scheduler for this classes calling the ==move== method.
+And you can add a dummy scheduler for these classes calling the ==move== method.
 
 [[[
 step
@@ -92,11 +92,11 @@ step
 
 !!!! Methods for StupidModel
 
-The scheduler is a litle bite more complicated because you need instance and class methods. lets go !
+The scheduler is a little bite more complicated because you need instance and class methods. Let's go !
 
-!!!!! you can initate with instance methods.
+!!!!! You can initiate with instance methods.
 
-You need to create accessor (*@accessor*). Assessor is a way to deal with variable of you class. Their, you whant accessor for each element of the instance variable list created previously during the classe implementation : ==theCMStupideCells==, ==theCMStupideAgents== and ==numberOfStupideAgent== .
+You need to create accessors (*@accessor*). Assessor is a way to deal with variable of your class. There, you want accessors for each element of the instance variable list created previously during the class implementation : ==theCMStupideCells==, ==theCMStupideAgents== and ==numberOfStupideAgent== .
 +Create accessor to your object>file://figures//home/delaye/github/Cormas/Booklet-CORMAS/Chapters/CORMAS/chap_stupide/figures/createInstanceAccessors.png|width=60%|label=accessor+
 
 for == == you need to do a lasy initialisation to be sure than you always have a number of agent created, because ==theCMStupideAgents== will wait a number.
@@ -117,7 +117,7 @@ initWithProgrammableScenario
 
 !!!!! you can continu with class methods.
 
-Firt we create a method in order to create a modeling
+Firt we implement a method in order to create a model instance
 
 [[[
 exampleSM1
@@ -130,7 +130,7 @@ exampleSM1
 		withSituatedEntities: aModel theCMStupideAgents) runAndVisualizeWithMenus
 ]]]
 
-Cormas is waiting for a default initialisation as accessor. So you can create accessor for class variable by rigth cliking or copy paste the following methods. ==defaultInit== will do reference to a instance variable created previously : ==initWithProgrammableScenario== 
+Cormas is waiting for a default initialization as accessor. So you can create accessor for class variable by right clicking or copy paste the following methods. ==defaultInit== will make reference to an instance variable created previously : ==initWithProgrammableScenario==
 
 [[[
 defaultInit
@@ -145,7 +145,6 @@ defaultInit: aSelector
 
 	defaultInit := aSelector
 ]]]
-
 
 +Stupid model, step 1 Done !>file://figures//home/delaye/github/Cormas/Booklet-CORMAS/Chapters/CORMAS/chap_stupide/figures/stupidModel_step1.png|width=60%|label=SMStep1+
 
