@@ -6,19 +6,19 @@ In the Railsback ''et al''. (2006) paper, they test : Netlogo, Masson, Repast, S
 In this chapter we will follow exactly the scheduler propose in the original paper (*@stupidUML*).
 
 
-+Stupid model UML>file://figures//home/delaye/github/Cormas/Booklet-CORMAS/Chapters/CORMAS/chap_stupide/figures/stupidModel.png|width=60%|label=stupidUML+
++Stupid model UML>file://figures/stupidModel.png|width=60%|label=stupidUML+
 
 !!! Step 1: a grid and some bugs
 
 !!!! Create a package and somes classes
 Before starting we need to create, a new package for our model. Create a package is made with a right click in the interface package part (*@createPackage*).
 
-+Create an empty package for your new model>file://figures//home/delaye/github/Cormas/Booklet-CORMAS/Chapters/CORMAS/chap_stupide/figures/createPackage.png|width=60%|label=createPackage+
++Create an empty package for your new model>file://figures/createPackage.png|width=60%|label=createPackage+
 
 
 In this empty package you can add 3 classes (e.g. *@stupidUML*) : CMStupidCell (for grid cells), CMStupidAgent, CMStupidModel (as schedulers), using the same method (rigth clik) but this time in the class part (*@createclasses*). And copy the code below.
 
-+Create class>file://figures//home/delaye/github/Cormas/Booklet-CORMAS/Chapters/CORMAS/chap_stupide/figures/createClasses.png|width=60%|label=createclasses+
++Create class>file://figures/createClasses.png|width=60%|label=createclasses+
 
 It looks like that for CMStupidCell
 
@@ -97,7 +97,7 @@ The scheduler is a little bite more complicated because you need instance and cl
 !!!!! You can initiate with instance methods.
 
 You need to create accessors (*@accessor*). Assessor is a way to deal with variable of your class. There, you want accessors for each element of the instance variable list created previously during the class implementation : ==theCMStupideCells==, ==theCMStupideAgents== and ==numberOfStupideAgent== .
-+Create accessor to your object>file://figures//home/delaye/github/Cormas/Booklet-CORMAS/Chapters/CORMAS/chap_stupide/figures/createInstanceAccessors.png|width=60%|label=accessor+
++Create accessor to your object>file://figures/createInstanceAccessors.png|width=60%|label=accessor+
 
 for == == you need to do a lasy initialisation to be sure than you always have a number of agent created, because ==theCMStupideAgents== will wait a number.
 
@@ -146,6 +146,6 @@ defaultInit: aSelector
 	defaultInit := aSelector
 ]]]
 
-+Stupid model, step 1 Done !>file://figures//home/delaye/github/Cormas/Booklet-CORMAS/Chapters/CORMAS/chap_stupide/figures/stupidModel_step1.png|width=60%|label=SMStep1+
++Stupid model, step 1 Done !>file://figures/stupidModel_step1.png|width=60%|label=SMStep1+
 
 !!! Step 2: growing bugs
