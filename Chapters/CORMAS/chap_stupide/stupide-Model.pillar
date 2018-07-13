@@ -1,0 +1,10 @@
+!! Building a Cormas Model from Scratch: the stupide model
+
+Stupide model was presented in 2006 in a paper from Railsback ''et al.'' in the "''Simulation''"" review under the title :"*Agent-based Simulation Platforms:
+Review and Development Recommendations>http://sim.sagepub.com/cgi/content/abstract/82/9/609*". His goal  was to propose an ABM step by step model in order to  have a standardized way to do benchmark different ABM platforme.
+In the Railsback ''et al''. (2006) paper, they test : Netlogo, Masson, Repast, Swarm. We propose here to reimplement the stupide model as an introduction to smaltalk and Cormas labguage.
+In this chapter we will follow exactly the scheduler propose in the original paper
+
+!!! Step 1: a grid and some bugs
+
+!!! Step 2: growing bugs
