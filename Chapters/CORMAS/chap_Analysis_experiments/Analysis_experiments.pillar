@@ -3,3 +3,127 @@
 !!!Analysis and experiments with R
 
 !!! OpenMole massive parallel analyse and exploration
+
+OpenMOLE${footnote: the openmole website is accecible here : https://next.openmole.org/}$ has been developed since 2008 as a free and open-source platform. It offers tools to run, explore, diagnose and optimize your numerical model, taking advantage of distributed computing environments. With OpenMOLE you can explore your already developed model, in any language (Java, Binary exe, NetLogo, R, SciLab, Python, C++...).
+
+OpenMOLE comes with a graphical user interface (GUI) to write scripts around your model. These scripts will use OpenMOLE methods to explore your model and distribute its executions on your labtop as on High Performing Computing (HPC) environments, with only a few lines of code!
+
+OpenMOLE is the tool you need if you want to carry out Real sensitivity analysis, Calibration on mono or multi criterion, Pattern diversity research in model dynamics, Custom design of experiments, Data processing.
+
+!!!! The basis for dialogue
+
+OpenMOLE work with docker. Regarding figure *@OMArch*, OpenMOLE is downloading a docker image of CORMAS and at the same time, it generates a set of parameter files in json. The CORMAS docker will be embedded in an archive sent to you dedicated computer (we will call it cluster). Each archive will be a job and those jobs will be assigned to the cluster scheduler. They will wait in the queue... and when they are achieved the result will be sent to you openMOLE instance.
+
++OpenMole and CORMAS achitecture>file://figures/Cormas_openMole.png|width=80%|label=OMArch+
+
+!!!! Script on openMOLE side
+
+First of all we will tack a look on a basical openMOLE script. 
+
+[[[
+
+// OpenMole Variable definition.
+// Those variables will be populated in openMole
+// and send in JSON to Pharo/Cormas
+
+val seed = Val[Int]
+
+val numberOfFires = Val[Int]
+val numberOfFiremen = Val[Int]
+val percentageOfTrees = Val[Double]
+val dimensionMin = Val[Int]
+val dimensionMax = Val[Int]
+val nbTrees = Val[Int]
+
+// The CORMASTask take in parameters the class and method able to
+// launch our simulation. In OUr case using the Cormas-Model-FireAutomata
+// we run a methods build for OpenMole. You can take a look.
+// set() allow you to pass some other thing to your task. You can pass :
+// * your model as a file.st
+// * inputs from OpenMole Variable
+// * outputs as an array
+// * defined parameters how doesn't change between simulation.
+
+val model = CORMASTask("CMFireAutomataModel simuOpenMole") set (
+  //resources += workDirectory / "Cormas-Model-FireAutomata.st",
+  inputs += seed,
+  cormasInputs += numberOfFires,
+  cormasInputs += numberOfFiremen,
+  cormasInputs += percentageOfTrees,
+  cormasInputs += dimensionMin,
+  cormasInputs += dimensionMax,
+  cormasOutputs += nbTrees,
+
+  outputs += (seed, numberOfFires, numberOfFiremen, percentageOfTrees, dimensionMin, dimensionMax),
+
+  numberOfFires := 3,
+  numberOfFiremen := 10,
+  percentageOfTrees := 0.65,
+  dimensionMin := 60,
+  dimensionMax := 80
+)
+
+//val env = LocalEnvironment(2)
+
+val env =
+  SGEEnvironment(
+    "delay",
+    "cc2-login.cirad.fr",
+    queue = "normal.q",
+    workDirectory = "/homedir/delay/work"
+  )
+
+// With the DirectSampling() method you define an easy wait to generate
+// a sampling for numberOfFires between 1 to 10.
+DirectSampling(
+  evaluation = model on env by 50 hook CSVHook(workDirectory / "results_by50_sge.csv"),
+  sampling = (numberOfFires in (1 to 10)) x
+  (seed in (UniformDistribution[Int]() take 100))
+)
+
+]]]
+
+!!!! Some change in our models
+
+To run your model in OpenMOLE you need to introduce some methods that will serve for communication between the model itself and OpenMOLE (step 2 fig. *@OMArch*).
+You must introduce two methods: ==CMOpenMoleExchange loadJSONFile: `input.json' == (to read the configuration file produced by openMOLE) and ==CMOpenMoleExchange saveJSONFile: (CMOpenMoleExchange lastDataOfModel: aModel)== (to save the results of the probes that interest you in an output file ==json==. 
+
+[[[ 
+simuOpenMole
+	"Example used in OpenMole (https://openmole.org/)"
+    | conf aModel |
+	 "self createInJSONFile." "OpenMole usually generate this file"
+    conf := CMOpenMoleExchange loadJSONFile: 'input.json'.
+    aModel := self newWithProgrammableScenario
+        numberOfFires: (conf at: #numberOfFires) ;
+        numberOfFiremen: (conf at: #numberOfFiremen);
+        percentageOfTrees: (conf at: #percentageOfTrees);
+        dimensions: (conf at: #dimensionMin) -> (conf at: #dimensionMax);
+        activeControl: #step:;
+        initSimulation.
+    aModel simManager
+        initializeSimulation;
+        finalTime: 100;
+        runSimulation.
+    CMOpenMoleExchange saveJSONFile: (self lastValuesOfVariables: (aModel data)) 
+]]]
+
+
+
+!!!! Benchmarking on fireman
+
+On “Fireman” model under:
+
+    100 replications
+        Desktop computer → 6 min ☻
+        CIRAD cluster → 22 min ☠ ☠
+
+    1000 replications
+        Desktop computer → 60 min ⚉
+        CIRAD cluster → 37 min ⚉
+
+    10000 replications
+        Desktop computer → 10h ☠ ☠
+        CIRAD cluster → 1h38 ☻
+
+
