@@ -27,8 +27,10 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: cbd61953a94f68c43e6ec75c4cdf66625aa1c3fa
+    secure: P15Ltgjt5snnUO0SpoTgjhhfw56oYvAK99YXo9WTbKQhODoQ5Sk0BJqxVbOwH+AMXsRA5e9q+uF7pFGIrjvaF3ZbnVCLXRcXjhV9sV5aRlGyI9PNBpFp6XGA/BWbd8ZJVULcgRoY2iupriFnj10HF/mihXJjIhq6Hk6KUu22hHgqmcjFnl/+ksckiAZFq0A6kKMT5Z7W3DYmVMcVGLFVAYbWwY1QPLKBPAnGP5kdTzY63vj04QLEaEQ2FxSGeeP4u+syBbv64qVkExjK6KeP0RKvNXyeq/vL+q8H9Txsp9K5V+H5CMo4E8ns8Y4rqHuD4gkitnDMPNIL/7JjULJwcwsAzTKZ3nGFd0SeAjUGvmkYpSkRbV4N+nreVyYRCxlUqqeIFuR8ZjC7ht66XPEXgX8xB90N7JIQLykN7UQV2Y9U4ReoBAM73F5WgiGAMZV5k6nEls66HQiswdAG+dbHO9idrKYkeaIr1gIsA1wGM95I5s8O9QRjLcLuJu4GmMbxDoKCKZLDwnV1pw6jBWQ7ru8cyvZydSsRM1K/Dc0NHIOR/ZP4MuPD68IALHeUKuf401bnknFNlmxDK4Bcl9YCEpw1Y75sFZqhc4PomBzTTF+FmpiX4MYIiI3efWfeAdjcUhIDKwZZwSct/rRKI8i5y9n3+sNS6E5zmuf6+WJzrac=
   file: build/book.spiral$(date +'%F-%T').pdf
+  on:
+    repo: cormas/Booklet-CORMAS
   skip_cleanup: true
   on:
 	tags: true
