@@ -25,11 +25,11 @@ script:
   - ./pillar/build/pillar build pdf
 
 deploy:
-	provider: releases
+  provider: releases
   api_key:
-    secure: aqE5qPyTMKbklg+io867S2cgRYBqHA30/+GnIkPj7je7bRrhmXqi+NVuZRp0TXxhhVdSanQrdGOtza/4PbTwqz15NbiLLk6aJ5jeOHRGwLhyGIUqv/JDU/rgzc+4t0H7A070ARgZ3aIaCAj3g3Iq/ph8FrfU4+jHXuzsrlwVzQz15xZWUVB7tn6wCh6JCj6jYXJKpjDc8n1NJWHcF19bOBvol7qUWbLdfkUgW78rcDS9bTugro7REaDCA3WTtB1njc3diD52NJrM1QsLa/FQo0i3eWdHpF3ZHNiEHSV4tBReXXanaWpVU/Lcvg0dAgbtyn1oda2XajBPLtp4MvxNBb8MlfsUqoyBd6fgXw1hjRDUGM2a/FBNqenB5aOcxXiduEE1/3WTmdMkKtQk+SiaOec9QGmfY26553yZAc2/XPW5ImB05t5OmBFD04JRnmwO3R7wOHw6N+tVEpAIrYjabiG+6zl7igrCNR9WLJ4PecMc5LCL7uHQGCun6trzDLK3v29CBQVqgK81Hlbqm+A3E0ajwoEaqInhuip1HrU4sIjL+XJG2g0XEjgIZBs5GcdTemQr0mwvUcNXn8yVEnL2II8bLt/pLLlIT68jOOk4LPx4iKROgzkY8ZCaPnhdB2w1mRzdOI0Ct3ObXdaAKIcgbvBqfNJydLosvEjykTuJ/t8=
-  file: build/book.spiral.pdf
+    secure: cbd61953a94f68c43e6ec75c4cdf66625aa1c3fa
+  file: build/book.spiral$(date +'%F-%T').pdf
   skip_cleanup: true
   on:
-	repo: cormas/Booklet-CORMAS
 	tags: true
+  
