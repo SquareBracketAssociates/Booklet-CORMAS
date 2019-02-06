@@ -1,15 +1,15 @@
 !! Building a Cormas Model from Scratch: the stupid model
 
 Stupid model was presented in 2006 in a paper from Railsback ''et al.'' in the "''Simulation''"" review under the title :"*Agent-based Simulation Platforms:
-Review and Development Recommendations>http://sim.sagepub.com/cgi/content/abstract/82/9/609*". His goal  was to propose an ABM step-by-step model in order to  have a standardized way to do benchmark different ABM platform.
-In the Railsback ''et al''. (2006) paper, they test : Netlogo, Masson, Repast, Swarm. We propose here to reimplement the stupid model as an introduction to Smalltalk programming language and Cormas framework. In this chapter we will follow exactly the scheduler propose in the original paper (*@stupidUML*).
+Review and Development Recommendations>http://sim.sagepub.com/cgi/content/abstract/82/9/609*". His goal was to propose an ABM step-by-step model in order to  have a standardized way to do benchmark different ABM platforms.
 
+In the Railsback ''et al''. (2006) paper, they test : Netlogo, Masson, Repast, Swarm. We propose here to reimplement the stupid model as an introduction to the CORMAS framework. In this chapter we will follow exactly the scheduler propose in the original paper (*@stupidUML*).
 
 +Stupid model UML>file://figures/stupidModel.png|width=60%|label=stupidUML+
 
 !!! Step 1: a grid and some bugs
 
-!!!! Create a package and somes classes
+!!!! Create a package and some classes
 Before starting we need to create, a new package for our model. Create a package is made with a right click in the interface package part (*@createPackage*).
 
 +Create an empty package for your new model>file://figures/createPackage.png|width=60%|label=createPackage+
@@ -22,33 +22,33 @@ In this empty package you can add 3 classes (e.g. *@stupidUML*) : CMStupidCell (
 It looks like that for CMStupidCell
 
 [[[
-CMSpatialEntityCell subclass: #CMStupideCell
+CMSpatialEntityCell subclass: #CMStupidCell
 	instanceVariableNames: ''
 	classVariableNames: ''
-	package: 'Cormas-Model-myStupide'
+	package: 'Cormas-Model-myStupid'
 ]]]
 
 For CMStupidAgent
 
 [[[
-CMAgentLocation subclass: #CMStupideAgent
+CMAgentLocation subclass: #CMStupidAgent
 	instanceVariableNames: 'agsize'
 	classVariableNames: ''
-	package: 'Cormas-Model-myStupide'
+	package: 'Cormas-Model-myStupid'
 ]]]
 
 And for the greate Scheduler
 
 [[[
 CormasModel subclass: #CMStupideModel
-  instanceVariableNames: 'theCMStupideCells theCMStupideAgents numberOfStupideAgent'
+  instanceVariableNames: 'theCMStupidCells theCMStupidAgents numberOfStupidAgent'
   classVariableNames: ''
-  package: 'Cormas-Model-myStupide'
+  package: 'Cormas-Model-myStupid'
 ]]]
 
-In this last class declaration, ==theCMStupideCells== and ==theCMStupideAgents== are built adding ==the== at the beginning and ==s== at the end. This instance variable will accede to a list of the concerned entities.
+In this last class declaration, ==theCMStupidCells== and ==theCMStupidAgents== are built adding ==the== at the beginning and ==s== at the end. This instance variable will accede to a list of the concerned entities.
 
-!!!! Methods for StupideCell
+!!!! Methods for StupidCell
 
 At this step you just need one instance method of POV (point of view). If you want to visualize some object CORMAS is waiting at least a color.
 
@@ -95,14 +95,14 @@ The scheduler is a little bite more complicated because you need instance and cl
 
 !!!!! You can initiate with instance methods.
 
-You need to create accessors (*@accessor*). Assessor is a way to deal with variable of your class. There, you want accessors for each element of the instance variable list created previously during the class implementation : ==theCMStupideCells==, ==theCMStupideAgents== and ==numberOfStupideAgent== .
+You need to create accessors (*@accessor*). Assessor is a way to deal with variable of your class. There, you want accessors for each element of the instance variable list created previously during the class implementation : ==theCMStupidCells==, ==theCMStupidAgents== and ==numberOfStupidAgent== .
 +Create accessor to your object>file://figures/createInstanceAccessors.png|width=60%|label=accessor+
 
-for == == you need to do a lasy initialisation to be sure than you always have a number of agent created, because ==theCMStupideAgents== will wait a number.
+for == == you need to do a lasy initialisation to be sure than you always have a number of agent created, because ==theCMStupidAgents== will wait a number.
 
 [[[
-numberOfStupideAgent
-	^ numberOfStupideAgent ifNil: [ numberOfStupideAgent := 10 ]
+numberOfStupidAgent
+	^ numberOfStupidAgent ifNil: [ numberOfStupidAgent := 10 ]
 ]]]
 
 It's time to create a scenario. In this method you will declar the grid size and with neighborhood you want : von Neumann (4) or moore (8). And you
@@ -111,7 +111,7 @@ It's time to create a scenario. In this method you will declar the grid size and
 initWithProgrammableScenario
 
 	self createGridX: 100 Y: 100 neighbourhood: 4 closed: false.
-	self setRandomlyLocatedAgents: CMStupideAgent n: self numberOfStupideAgent.
+	self setRandomlyLocatedAgents: CMStupidAgent n: self numberOfStupidAgent.
 ]]]
 
 !!!!! you can continu with class methods.
@@ -125,8 +125,8 @@ exampleSM1
 	aModel := self initialize new initSimulation.
 	(CMSimulationGrid new
 		on: aModel
-		withCells: aModel theCMStupideCells
-		withSituatedEntities: aModel theCMStupideAgents) runAndVisualizeWithMenus
+		withCells: aModel theCMStupidCells
+		withSituatedEntities: aModel theCMStupidAgents) runAndVisualizeWithMenus
 ]]]
 
 Cormas is waiting for a default initialization as accessor. So you can create accessor for class variable by right clicking or copy paste the following methods. ==defaultInit== will make reference to an instance variable created previously : ==initWithProgrammableScenario==
