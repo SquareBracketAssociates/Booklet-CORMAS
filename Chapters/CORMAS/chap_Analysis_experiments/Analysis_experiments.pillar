@@ -18,7 +18,96 @@ OpenMOLE work with docker. Regarding figure *@OMArch*, OpenMOLE is downloading a
 
 !!!! Script on openMOLE side
 
-First of all we will tack a look on a basical openMOLE script. 
+We will tack a look on a basical openMOLE script step by step based on a Cormas toys model : FireAutomata.
+
+The first step is to map our input and output variables according the model variable in order to allow communication between OpenMOLE variable and CORMAS variable.
+This model have 3 input variables : the initial number of fire, the number of fireman and the percentage of trees (some cell are bare sol). And we are interested by 1 output variable : the number of trees not burned at the end of the simulation.
+
+In openMOLE variable declaration${footnote: comments are made by ==//==. All thing after ==//== are not interpreted.}$ look like that :
+
+[[[
+
+val seed = Val[Int] // defined a random seed
+
+val numberOfFires = Val[Int] //input variable
+val numberOfFiremen = Val[Int] //input variable
+val percentageOfTrees = Val[Double] //input variable
+val dimensionMin = Val[Int]  //input variable : grid dimensions X
+val dimensionMax = Val[Int]  //input variable : grid dimensions Y
+val nbTrees = Val[Int] //output variable
+
+]]]
+
+The link between openMOLE and CORMAS is maid by the ==CORMASTask()==. In this task you passe different input and output.
+If you whant to fixe some variable (and exclude them from the sampling method that we describe below) you can do that as follow.
+
+[[[
+// The CORMASTask take in parameters the class and method able to
+// launch our simulation. In OUr case using the Cormas-Model-FireAutomata
+// we run a methods build for OpenMole. You can take a look.
+// set() allow you to pass some other thing to your task. You can pass :
+// * your model as a file.st
+// * inputs from OpenMole Variable
+// * outputs as an array
+// * defined parameters how doesn't change between simulation.
+
+val model = CORMASTask("CMFireAutomataModel simuOpenMole") set (
+  //resources += workDirectory / "Cormas-Model-FireAutomata.st",
+  inputs += seed,
+  cormasInputs += numberOfFires,
+  cormasInputs += numberOfFiremen,
+  cormasInputs += percentageOfTrees,
+  cormasInputs += dimensionMin,
+  cormasInputs += dimensionMax,
+  cormasOutputs += nbTrees,
+
+  outputs += (seed, numberOfFires, numberOfFiremen, percentageOfTrees, dimensionMin, dimensionMax),
+
+  numberOfFires := 3,
+  numberOfFiremen := 10,
+  percentageOfTrees := 0.65,
+  dimensionMin := 60,
+  dimensionMax := 80
+)
+
+]]]
+
+You can worry about the calculation environment. OpenMOLE allow to to deal transparentlly with local CPU as grided computer${footnote: You can tack a look on this section on the openMOLE website : https://openmole.org/Scale.html consulted 2019-02-07}$.
+
+For exemple with ==LocalEnvironment(2)== you will use your local CPU here with 2 threads
+[[[
+val env = LocalEnvironment(2)
+]]]
+
+while with ==SGEEnvironment()== you can deal with SGE cluster scheduler .
+
+[[[
+val env =
+  SGEEnvironment(
+    "login",
+    "cluster.url",
+    queue = "normal.q",
+    workDirectory = "/homedir/user/work"
+  )
+
+]]]
+
+A lot of other environments are supported so doesn't esitate to tack a look on documentation.
+
+As for the environnement, openMOLE embeded a lot of smart sampling and exploration methods. For this example we will use a basic one : ==DirectSampling()==.
+In this script it's the sampling method how will prepare all the jobs archives. So you specifie the hook (a wait to tack output from model), the sampling (based here on ==numberOfFires== between 1 to 10 fire), and the number of replication with ==take 100==.
+
+[[[
+// With the DirectSampling() method you define an easy wait to generate
+// a sampling for numberOfFires between 1 to 10.
+DirectSampling(
+  evaluation = model on env by 50 hook CSVHook(workDirectory / "results_by50_sge.csv"),
+  sampling = (numberOfFires in (1 to 10)) x
+  (seed in (UniformDistribution[Int]() take 100))
+)
+]]]
+
+Fianly it look like that :
 
 [[[
 
@@ -67,10 +156,10 @@ val model = CORMASTask("CMFireAutomataModel simuOpenMole") set (
 
 val env =
   SGEEnvironment(
-    "delay",
-    "cc2-login.cirad.fr",
+    "login",
+    "cluster.url",
     queue = "normal.q",
-    workDirectory = "/homedir/delay/work"
+    workDirectory = "/homedir/user/work"
   )
 
 // With the DirectSampling() method you define an easy wait to generate
@@ -86,9 +175,9 @@ DirectSampling(
 !!!! Some change in our models
 
 To run your model in OpenMOLE you need to introduce some methods that will serve for communication between the model itself and OpenMOLE (step 2 fig. *@OMArch*).
-You must introduce two methods: ==CMOpenMoleExchange loadJSONFile: `input.json' == (to read the configuration file produced by openMOLE) and ==CMOpenMoleExchange saveJSONFile: (CMOpenMoleExchange lastDataOfModel: aModel)== (to save the results of the probes that interest you in an output file ==json==. 
+You must introduce two methods: ==CMOpenMoleExchange loadJSONFile: `input.json' == (to read the configuration file produced by openMOLE) and ==CMOpenMoleExchange saveJSONFile: (CMOpenMoleExchange lastDataOfModel: aModel)== (to save the results of the probes that interest you in an output file ==json==.
 
-[[[ 
+[[[
 simuOpenMole
 	"Example used in OpenMole (https://openmole.org/)"
     | conf aModel |
@@ -105,7 +194,7 @@ simuOpenMole
         initializeSimulation;
         finalTime: 100;
         runSimulation.
-    CMOpenMoleExchange saveJSONFile: (self lastValuesOfVariables: (aModel data)) 
+    CMOpenMoleExchange saveJSONFile: (self lastValuesOfVariables: (aModel data))
 ]]]
 
 
@@ -125,5 +214,3 @@ On “Fireman” model under:
     10000 replications
         Desktop computer -> 10h
         CIRAD cluster -> 1h38
-
-
