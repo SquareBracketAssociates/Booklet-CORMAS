@@ -2,28 +2,28 @@
 
 !!!Analysis and experiments with R
 
-!!! OpenMole massive parallel analyse and exploration
+!!! OpenMole massive parallel analyzes and exploration
 
-OpenMOLE${footnote: the openmole website is accecible here : https://next.openmole.org/}$ has been developed since 2008 as a free and open-source platform. It offers tools to run, explore, diagnose and optimize your numerical model, taking advantage of distributed computing environments. With OpenMOLE you can explore your already developed model, in any language (Java, Binary exe, NetLogo, R, SciLab, Python, C++...).
+OpenMOLE${footnote: the openMOLE website is accessible here : https://next.openmole.org/}$ has been developed since 2008 as a free and open-source platform. It offers tools to run, explore, diagnose and optimize your numerical model, taking advantage of distributed computing environments. With OpenMOLE you can explore your already developed model, in any language (Java, Binary exe, NetLogo, R, SciLab, Python, C++...).
 
-OpenMOLE comes with a graphical user interface (GUI) to write scripts around your model. These scripts will use OpenMOLE methods to explore your model and distribute its executions on your labtop as on High Performing Computing (HPC) environments, with only a few lines of code!
+OpenMOLE comes with a graphical user interface (GUI) to write scripts around your model. These scripts will use OpenMOLE methods to explore your model and distribute its executions on your laptop as on High Performing Computing (HPC) environments, with only a few lines of code!
 
-OpenMOLE is the tool you need if you want to carry out Real sensitivity analysis, Calibration on mono or multi criterion, Pattern diversity research in model dynamics, Custom design of experiments, Data processing.
+OpenMOLE is the tool you need if you want to carry out Real sensitivity analysis, calibration on mono or multi-criteria, Pattern diversity research in model dynamics, custom design of experiments, data processing.
 
 !!!! The basis for dialogue
 
-OpenMOLE work with docker. Regarding figure *@OMArch*, OpenMOLE is downloading a docker image of CORMAS and at the same time, it generates a set of parameter files in json. The CORMAS docker will be embedded in an archive sent to you dedicated computer (we will call it cluster). Each archive will be a job and those jobs will be assigned to the cluster scheduler. They will wait in the queue... and when they are achieved the result will be sent to you openMOLE instance.
+OpenMOLE work with docker. Regarding figure *@OMArch*, OpenMOLE is downloading a docker image of CORMAS and at the same time, it generates a set of parameter files in json. The CORMAS docker will be embedded in an archive sent to you dedicated computer (we will call it clusters). Each archive will be a job and those jobs will be assigned to the cluster scheduler. They will wait in the queue... and when they are achieved the result will be sent to you openMOLE instance.
 
-+OpenMole and CORMAS achitecture>file://figures/Cormas_openMole.png|width=80%|label=OMArch+
++OpenMole and CORMAS architecture>file://figures/Cormas_openMole.png|width=80%|label=OMArch+
 
 !!!! Script on openMOLE side
 
-We will tack a look on a basical openMOLE script step by step based on a Cormas toys model : FireAutomata.
+We will take a look at a basic openMOLE script step by step based on a Cormas toy model : FireAutomata.
 
-The first step is to map our input and output variables according the model variable in order to allow communication between OpenMOLE variable and CORMAS variable.
-This model have 3 input variables : the initial number of fire, the number of fireman and the percentage of trees (some cell are bare sol). And we are interested by 1 output variable : the number of trees not burned at the end of the simulation.
+The first step is to map our input and output variables according to the model variable in order to allow communication between OpenMOLE variable and CORMAS variable.
+This model has 3 input variables : the initial number of fires, the number of firemen and the percentage of trees (some cell are bare sol). And we are interested by 1 output variable : the number of trees not burned at the end of the simulation.
 
-In openMOLE variable declaration${footnote: comments are made by ==//==. All thing after ==//== are not interpreted.}$ look like that :
+In openMOLE variable declarations${footnote: comments are made by ==//==. All thing after ==//== are not interpreted.}$ look like that :
 
 [[[
 
@@ -38,13 +38,13 @@ val nbTrees = Val[Int] //output variable
 
 ]]]
 
-The link between openMOLE and CORMAS is maid by the ==CORMASTask()==. In this task you passe different input and output.
-If you whant to fixe some variable (and exclude them from the sampling method that we describe below) you can do that as follow.
+The link between openMOLE and CORMAS is made by the ==CORMASTask()==. In this task you passe different input and output.
+If you want to fix some variable (and exclude them from the sampling method that we describe below) you can do that as follows.
 
 [[[
 // The CORMASTask take in parameters the class and method able to
 // launch our simulation. In OUr case using the Cormas-Model-FireAutomata
-// we run a methods build for OpenMole. You can take a look.
+// we run a method build for OpenMole. You can take a look.
 // set() allow you to pass some other thing to your task. You can pass :
 // * your model as a file.st
 // * inputs from OpenMole Variable
@@ -72,9 +72,9 @@ val model = CORMASTask("CMFireAutomataModel simuOpenMole") set (
 
 ]]]
 
-You can worry about the calculation environment. OpenMOLE allow to to deal transparentlly with local CPU as grided computer${footnote: You can tack a look on this section on the openMOLE website : https://openmole.org/Scale.html consulted 2019-02-07}$.
+You can worry about the calculation environment. OpenMOLE allow dealing transparently with local CPU as grided computer${footnote: You can tack a look at this section on the openMOLE website : https://openmole.org/Scale.html consulted 2019-02-07}$.
 
-For exemple with ==LocalEnvironment(2)== you will use your local CPU here with 2 threads
+For example, with ==LocalEnvironment(2)== you will use your local CPU here with 2 threads
 [[[
 val env = LocalEnvironment(2)
 ]]]
@@ -94,8 +94,8 @@ val env =
 
 A lot of other environments are supported so doesn't esitate to tack a look on documentation.
 
-As for the environnement, openMOLE embeded a lot of smart sampling and exploration methods. For this example we will use a basic one : ==DirectSampling()==.
-In this script it's the sampling method how will prepare all the jobs archives. So you specifie the hook (a wait to tack output from model), the sampling (based here on ==numberOfFires== between 1 to 10 fire), and the number of replication with ==take 100==.
+As for the environment, openMOLE embedded a lot of smart sampling and exploration methods. For this example we will use a basic one : ==DirectSampling()==.
+In this script it's sampling method how will prepare all the jobs archives. So you specify the hook (a wait to take output from the model), the sampling (based here on ==numberOfFires== between 1 to 10 fire), and the number of replication with ==take 100==.
 
 [[[
 // With the DirectSampling() method you define an easy wait to generate
@@ -107,7 +107,7 @@ DirectSampling(
 )
 ]]]
 
-Fianly it look like that :
+Finally, it looks like that :
 
 [[[
 
