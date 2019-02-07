@@ -38,7 +38,7 @@ val nbTrees = Val[Int] //output variable
 
 ]]]
 
-The link between openMOLE and CORMAS is made by the ==CORMASTask()==. In this task you passe different input and output.
+The link between openMOLE and CORMAS is made by the ==CORMASTask()==. In this task you passe different input and output. And you call the specific methods defined to run a model (we will describe this method below).
 If you want to fix some variable (and exclude them from the sampling method that we describe below) you can do that as follows.
 
 [[[
@@ -172,9 +172,11 @@ DirectSampling(
 
 ]]]
 
+Once you have a better idea about how openMOLE and CORMAS will talk each other we will take a look at CORMAS model and methods.
+
 !!!! Some change in our models
 
-To run your model in OpenMOLE you need to introduce some methods that will serve for communication between the model itself and OpenMOLE (step 2 fig. *@OMArch*).
+To run your model in OpenMOLE you need to introduce a method that will serve for communication between the model itself and OpenMOLE (step 2 fig. *@OMArch*).
 You must introduce two methods: ==CMOpenMoleExchange loadJSONFile: `input.json' == (to read the configuration file produced by openMOLE) and ==CMOpenMoleExchange saveJSONFile: (CMOpenMoleExchange lastDataOfModel: aModel)== (to save the results of the probes that interest you in an output file ==json==.
 
 [[[
@@ -203,14 +205,12 @@ simuOpenMole
 
 On “Fireman” model under:
 
-    100 replications
-        Desktop computer -> 6 min
-        CIRAD cluster -> 22 min
-
-    1000 replications
-        Desktop computer -> 60 min
-        CIRAD cluster -> 37 min
-
-    10000 replications
-        Desktop computer -> 10h
-        CIRAD cluster -> 1h38
+|!100 replications |!~
+|Desktop computer |  6 min
+|CIRAD cluster | 22 min
+!1000 replications |!~
+|Desktop computer |  60 min
+|CIRAD cluster | 37 min
+!10000 replications |!~
+|Desktop computer |  10h
+|CIRAD cluster | 1h38
