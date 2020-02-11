@@ -58,7 +58,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="329.48918"
+     inkscape:cx="337.34632"
      inkscape:cy="120.76809"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -69,7 +69,7 @@
      fit-margin-bottom="10"
      inkscape:window-width="1920"
      inkscape:window-height="1052"
-     inkscape:window-x="1366"
+     inkscape:window-x="3286"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
@@ -80,7 +80,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -308,34 +308,34 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777767px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="85.535561"
+       x="88.710564"
        y="41.659763"
        id="text1827-1-4"><tspan
          sodipodi:role="line"
          id="tspan1825-1-0"
-         x="85.535561"
+         x="88.710564"
          y="41.659763"
          style="stroke-width:0.26458332">2014</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777767px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="102.9613"
+       x="106.66547"
        y="41.59832"
        id="text1827-1-4-8"><tspan
          sodipodi:role="line"
          id="tspan1825-1-0-3"
-         x="102.9613"
+         x="106.66547"
          y="41.59832"
          style="stroke-width:0.26458332">2015</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777767px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="127.33656"
+       x="127.86573"
        y="41.459312"
        id="text1827-1-4-0"><tspan
          sodipodi:role="line"
          id="tspan1825-1-0-7"
-         x="127.33656"
+         x="127.86573"
          y="41.459312"
          style="stroke-width:0.26458332">2016</tspan></text>
     <text
@@ -406,13 +406,40 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777767px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="68.285713"
+       x="70.931549"
        y="41.583916"
        id="text1827-1-4-5"><tspan
          sodipodi:role="line"
          id="tspan1825-1-0-1"
-         x="68.285713"
+         x="70.931549"
          y="41.583916"
          style="stroke-width:0.26458332">2009</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 46.77202,33.26577 v 15.874999 h 9.260417"
+       id="path895"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.11666656px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="57.279766"
+       y="49.06517"
+       id="text899"><tspan
+         sodipodi:role="line"
+         id="tspan897"
+         x="57.279766"
+         y="49.06517"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;font-family:'Helvetica Neue';-inkscape-font-specification:'Helvetica Neue';stroke-width:0.26458332">Embauche de P. Bommel</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777767px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="57.752998"
+       y="52.306961"
+       id="text1827-1-7"><tspan
+         sodipodi:role="line"
+         id="tspan1825-1-8"
+         x="57.752998"
+         y="52.306961"
+         style="stroke-width:0.26458332">2001</tspan></text>
   </g>
 </svg>
