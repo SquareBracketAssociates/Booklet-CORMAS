@@ -18,8 +18,8 @@ The Plants are created only once and have a fixed location. They do not move, di
 +Logistic equation (r = 0.2 and k = 10)>file://figures/equation_log.png|width=35%|label=equationLog+
 
 
-% fig1 was maid with R script available in this repo : script/fig1.R
-+Logistic equation and its sigmoid curves (r = 0.2 and k = 10)>file://figures/fig1.png|width=100|label=sigmoth+
+% fig1 was maid with R script available in this repo : script/fig1.R 
++Logistic equation and its sigmoid curves (r = 0.2 and k = 10)>file://figures/logisticCurves.png|width=100|label=sigmoth+
 
 !!!! The Foragers
 Each step, the Foragers burn energy according to their catabolic rate. This rate is the same for all foragers. It is fixed to 2 units of energy per time period.
