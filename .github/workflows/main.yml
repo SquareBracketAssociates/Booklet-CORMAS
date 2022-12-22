@@ -32,7 +32,7 @@ jobs:
         run: |
           export PATH="$HOME/texlive/bin/x86_64-linux:$PWD/build:$PATH"
           pillar build pdf book.md
-          mv _result/pdf/index.pdf _result/pdf/Booklet-CORMAS.pdf
+          mv _result/pdf/book.pdf _result/pdf/Booklet-CORMAS.pdf
       - name: Continuous Release
         if: ${{ github.event_name == 'push' }}
         uses: "marvinpinto/action-automatic-releases@latest"
