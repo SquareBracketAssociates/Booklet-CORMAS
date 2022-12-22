@@ -214,19 +214,19 @@ simuOpenMole
 On “Fireman” model under:
 
 
-% | 100 replications | \~ |
-% | --- | --- |
-% | Desktop computer | 6 min |
-% | CIRAD cluster | 22 min |
+| 100 replications | \~ |
+| --- | --- |
+| Desktop computer | 6 min |
+| CIRAD cluster | 22 min |
 
 
-% | 1000 replications | \~ |
-% | --- | --- |
-% | Desktop computer | 60 min |
-% | CIRAD cluster | 37 min |
+| 1000 replications | \~ |
+| --- | --- |
+| Desktop computer | 60 min |
+| CIRAD cluster | 37 min |
 
 
-% | 10000 replications | \~ |
-% | --- | --- |
-% | Desktop computer | 10h |
-% | CIRAD cluster | 1h38 |
+| 10000 replications | \~ |
+| --- | --- |
+| Desktop computer | 10h |
+| CIRAD cluster | 1h38 |
