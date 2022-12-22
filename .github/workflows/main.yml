@@ -23,11 +23,10 @@ jobs:
         run: |
           git clone https://github.com/pillar-markup/pillar.git -b v8.0.12
           export PATH="$HOME/texlive/bin/x86_64-linux:$PWD/build:$PATH"
-          echo "############## Installing TeXLive ##############"
           ./pillar/scripts/ci/install-texlive
-          echo "############## Ensuring deps ##############"
+          echo "#################################"
+          chmod +x ./_support/latex/ensure-deps.sh
           ./_support/latex/ensure-deps.sh
-          echo "############## Building ##############"
           ./pillar/scripts/build.sh
           mkdir artifacts
           
