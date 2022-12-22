@@ -40,12 +40,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: true
-          title: "Save PDF"
+          title: "PDF (continuous release)"
           files: |
             _result/pdf/*.pdf
-      - name: Build HTML
-        run: |
-          export PATH="$HOME/texlive/bin/x86_64-linux:$PWD/build:$PATH"
-          pillar build html book.md
-          ls -R _result/
     
