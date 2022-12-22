@@ -24,7 +24,7 @@ jobs:
           git clone https://github.com/pillar-markup/pillar.git -b v8.2.6
           export PATH="$HOME/texlive/bin/x86_64-linux:$PWD/build:$PATH"
           ./pillar/scripts/ci/install-texlive
-          ./_support/latex/ensure-deps.sh
+          ./_support/latex/ensure-dependencies-2018.sh
           ./pillar/scripts/build.sh
           mkdir artifacts
           
