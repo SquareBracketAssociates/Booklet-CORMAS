@@ -18,7 +18,9 @@ This model contains two kinds of entities: plants and foragers.
 
 The Plants are created only once and have a fixed location. They do not move, die or reproduce. A plant's only "behaviors" is to grow \(and be eaten by foragers\). The plants vary only in their biomass, which represents the amount of food energy available to foragers. At each time unit, this biomass level increases according to a logistic growth curve:
 
-$x_{t+1} = x_{t}+r_{x_{t}}(1 - \frac{x_{t}}{k})$
+$$
+x_{t+1} = x_{t}+r_{x_{t}}(1 - \frac{x_{t}}{k})
+$$
 
 
 %  fig1 was made with R script available in this repo : script/fig1.R 
