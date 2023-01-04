@@ -1,7 +1,7 @@
 ## Building a Model from Scratch: ECEC Model
 
 
-The model we present here and that you will build is inspired from a paper by Pepper and Smuts: [Evolution of Cooperation in an Ecological Context](https://www.researchgate.net/profile/John_Pepper3/publication/247870731_The_evolution_of_cooperation_in_an_ecological_context_An_agent-based_model/links/00b4952aafdf270b02000000/The-evolution-of-cooperation-in-an-ecological-context-An-agent-based-model.pdf).
+The model we present here and that you will build is inspired by a paper by Pepper and Smuts: Evolution of Cooperation in an Ecological Context {!citation|ref=Pepp00a!}.
 
 The model consists of a 2 dimensional grid, wrapped in both axes to avoid edge effects. It contains two kinds of entities: plants and foragers. The main idea is to study the survival of two populations of agents that depends on the spatial configuration.
 
@@ -67,7 +67,7 @@ The underlined attributes are called "Class variables": their values are equal f
 #### Dynamics' description of ECEC
 
 
-The following Sequence Diagram presents the main time step of ECEC. This is a DTSS \('Discrete Time System Specification', according to Zeigler et al. 2000classification\) that, on the contrary of DEVS \('Discrete Event System Specification'\), the evolution of the simulation is sliced in time steps.
+The following Sequence Diagram presents the main time step of ECEC. This is a DTSS \('Discrete Time System Specification', according to the classification proposed by Zeigler et al. {!citation|ref=Zeig00a!}\) that, on the contrary of DEVS \('Discrete Event System Specification'\), the evolution of the simulation is sliced in time steps.
 
 As the model is purely theoretical, the step duration is not defined. In one step, all entities should evolve: the plants increase their biomass \(according to Logistic equation\), and the foragers perform their biological functions. In order not to give always preference to the same agents \(the privilege to choose first the best plant\), the list of the foragers is randomly mixed at each step.
 
