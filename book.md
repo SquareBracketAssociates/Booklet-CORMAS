@@ -4,6 +4,7 @@
 Based on feedback from experienced research and teaching.
 
 <!inputFile|path=Chapters/CORMAS/chap_modelling_guide/modelling_guide_general.md!>
+<!inputFile|path=Chapters/CORMAS/chap_pharo_introduction/pharo-intro.md!>
 <!inputFile|path=Chapters/CORMAS/chap_stupide/stupide-Model.md!>
 <!inputFile|path=Chapters/CORMAS/chap_fireman/Fireman-Model.md!>
 <!inputFile|path=Chapters/CORMAS/chap_ecec/ECEC-Model.md!>

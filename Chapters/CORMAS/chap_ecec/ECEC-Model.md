@@ -5,9 +5,7 @@ The model we present here and that you will build is inspired by a paper by Pepp
 
 The model consists of a 2 dimensional grid, wrapped in both axes to avoid edge effects. It contains two kinds of entities: plants and foragers. The main idea is to study the survival of two populations of agents that depends on the spatial configuration.
 
-This ECEC model can be found in the github repository here: ...
-
-!!todo Don't forget URL to github.
+This implementation of the ECEC model can be found in the GitHub repository of Cormas.{!footnote|note=https://github.com/cormas/cormas!}
 
 ### Basic description
 
@@ -16,7 +14,7 @@ This model contains two kinds of entities: plants and foragers.
 
 #### The Plants
 
-The Plants are created only once and have a fixed location. They do not move, die or reproduce. A plant's only "behaviors" is to grow \(and be eaten by foragers\). The plants vary only in their biomass, which represents the amount of food energy available to foragers. At each time unit, this biomass level increases according to a logistic growth curve:
+The Plants are created only once and have a fixed location. They do not move, die or reproduce. A plant's only "behavior" is to grow \(and be eaten by foragers\). The plants vary only in their biomass, which represents the amount of food energy available to foragers. At each time unit, this biomass level increases according to a logistic growth curve:
 
 $$
 x_{t+1} = x_{t}+r_{x_{t}}(1 - \frac{x_{t}}{k})
@@ -28,21 +26,21 @@ $$
 
 #### The Foragers
 
-Each step, the Foragers burn energy according to their catabolic rate. This rate is the same for all foragers. It is fixed to 2 units of energy per time period.
+At each step, the Foragers burn energy according to their catabolic rate. This rate is the same for all foragers. It is fixed to 2 units of energy per time period.
 
-A forager feeds on the plant in its current location if there is one. It increases its own energy by reducing the same amount of the plant. Foragers are of two types that differs in their feeding behavior:
+A forager feeds on the plant in its current location if there is one. It increases its own energy by reducing the same amount of the plant's biomass. Foragers are of two types that differ in their feeding behavior - the amount of biomass they consume, called the _harvest rate_:
 
-When "Restrained" foragers eat, they take only 50% of the plant's energy.
+* **Restrained foragers** take only 50% of the plant's biomass.
 
-In constrast, "Unrestrained" foragers eat 99% of the plant. This harvest rate is less than 100% so that plants can continue to grow after being fed on, rather than being permanently destroyed.
+* **Unrestrained foragers** eat 99% of the plant. This harvest rate is less than 100% so that plants can continue to grow after being fed on, rather than being permanently destroyed.
 
 The Foragers do not change their feeding behavior type and their offspring keep the same heritable traits.
 
 **Rules for Foragers' Movements**
 
-Foragers examine their current location and around. From those not occupied by another forager, they choose the one containing the plant with the highest energy.
+Foragers examine their current location and the surrounding cells (8 adjacent cells). From those not occupied by another forager, they choose the one containing the plant with the highest energy.
 
-If the chosen plant would yield enough food to meet their catabolic rate they move there. If not, they move instead to a randomly chosen adjacent free place \(not occupied by another forager\). This movement rule leads to the emigration of foragers from depleted patches, and simulates the behavior of individuals exploiting local food sources while they last, but migrating rather than starving in an inadequate food patch.
+If the chosen plant would yield enough food to meet their catabolic rate they move there. If not, they move instead to a randomly chosen adjacent free cell (not occupied by another forager). This movement rule leads to the emigration of foragers from depleted patches, and simulates the behavior of individuals exploiting local food sources while they last, but migrating rather than starving in an inadequate food patch.
 
 ##### Other Biological Functions of Foragers
 
@@ -51,61 +49,64 @@ Foragers loose energy \(catabolic rate, 2 points\) regardless of whether or not 
 
 If their energy level reaches zero, they die. But they do not have maximum life spans.
 
-If a forager's energy level reaches an upper fertility threshold \(fixed to 100\), it reproduces asexually, creating an offspring with the same heritable traits as itself \(e.g., feeding strategy\). At the same time the parent's energy level is reduced by the offspring's initial energy \(50\). Newborn offspring occupy the nearest free place to their parent.
+If a forager's energy level reaches an upper fertility threshold \(fixed to 100\), it reproduces asexually, creating an offspring with the same heritable traits as itself \(e.g., feeding strategy\). At the same time the parent's energy level is reduced by the offspring's initial energy \(50\). Newborn offspring occupy the nearest free place to their parent. If there is no free space around the forager, it does not reproduce.
 
 ### Model formalism in UML
 
 
 #### Structure of ECEC
 
-The following Class diagram presents the structure of the model.
-% maid with argoUML file figure/uml_ecec.zargo
-![UML Class diagramm](figures/Diagrammedeclasses.png width=100&label=uml)
+The class diagram in Figure *@fig:ecec-UML@* presents the structure of the model.
 
-The underlined attributes are called "Class variables": their values are equal for all instances. For example, the catabolicRate class variable means that its value \(2 units of energy\) is identical for every foragers whatever their strategy \(restrained or unrestrained\).
+% maid with argoUML file figure/uml_ecec.zargo
+![UML Class diagramm](figures/Diagrammedeclasses.png width=100&label=fig:ecec-UML)
+
+The underlined attributes are called "Class variables": their values are equal for all instances. For example, the catabolicRate class variable means that its value \(2 units of energy\) is identical for every forager, both restrained and unrestrained.
 
 #### Dynamics' description of ECEC
 
 
-The following Sequence Diagram presents the main time step of ECEC. This is a DTSS \('Discrete Time System Specification', according to the classification proposed by Zeigler et al. {!citation|ref=Zeig00a!}\) that, on the contrary of DEVS \('Discrete Event System Specification'\), the evolution of the simulation is sliced in time steps.
+The sequence diagram in Figure *@fig:ecec-MainStepSequenceDiagram@* presents the main time step of ECEC. This is a DTSS \('Discrete Time System Specification', according to the classification proposed by Zeigler et al. {!citation|ref=Zeig00a!}\) meaning that, on the contrary of DEVS \('Discrete Event System Specification'\), the evolution of the simulation is sliced in time steps.
 
-As the model is purely theoretical, the step duration is not defined. In one step, all entities should evolve: the plants increase their biomass \(according to Logistic equation\), and the foragers perform their biological functions. In order not to give always preference to the same agents \(the privilege to choose first the best plant\), the list of the foragers is randomly mixed at each step.
+![The main step sequence diagram](figures/scheduler-main-step.png width=70&label=fig:ecec-MainStepSequenceDiagram)
+
+As the model is purely theoretical, the step duration is not defined. In one step, all entities should evolve: the plants increase their biomass \(according to Logistic equation\), and the foragers perform their biological functions. To avoid biasing the model by always giving preference to the same agents \(the privilege to choose first the best plant\), the list of the foragers is randomly mixed at each step.
+
+The diagram presented in Figure *@fig:ecec-ForagerDiagram@* describes the activities performed by foragers at each step.
+
+![Activity diagram of a Forager](figures/forager-step.png width=50&label=fig:ecec-ForagerDiagram)
+
+The sequence diagram in Figure *@fig:ecec-ReproductionDiagram@* shows the reproduction behavior of the foragers.
+
+![Sequence diagram of the reproduction process](figures/reproduction-diagram.png width=70&label=fig:ecec-ReproductionDiagram)
 
 ### Adapting ECEC to CORMAS Framework
 
 
-The following diagram is an adaptation of the main class diagram \(in design stage, see Figure *@uml@*\) to fit the Cormas framework.
+The diagram in Figure *@fig:ecec-UMLCormas@* is an adaptation of the main class diagram \(in design stage, see Figure *@fig:ecec-UML@*\) to fit the Cormas framework.
 
-![UML class diagram, adapted to Cormas \(implementation stage\)](figures/uml_cormas.png width=100&label=umlCormas)
+![UML class diagram, adapted to Cormas \(implementation stage\)](figures/uml_cormas.png width=100&label=fig:ecec-UMLCormas)
 
 ECEC defines 3 kinds of entities: Plants, RestrainedForagers and UnrestrainedForagers.
 
 As the plants are spatially located and can't move, we aggregated the plant with the spatial unit in one entity. Thus, a VegetationUnit is a kind of _SpatialEntityCell_ with additional attribute: “biomass”.
 
-As the foragers are the located agents of ECEC, the Forager class must inherit from _AgentLocation_ abilities, in order to enable the agents to move and to perceive their neighborhoods.
+As the foragers are the located agents of ECEC, the Forager class must inherit from _AgentLocation_ abilities to enable the agents to move and to perceive their neighborhoods.
 
-#### Implementing ECEC with CORMAS
+### Implementing ECEC with CORMAS
 
-
-Because based on Pharo Smalltalk, Cormas is a cross-platform software that can directly run on any platform without special preparation. Thus Cormas and your model should run on Microsoft Windows, Mac OS X and Linux. You can download the new release here: ...
-
-!!todo URL pharo-Cormas
-
-#### Opening CORMAS
-
-
-For linux user `./pharo cormas.image`.
+The brief introduction to Pharo can be found in Chapter *@chap:pharo@*, the instructions to install Cormas are in Section *@sec:pharo-InstallingCormas@*.
 
 #### Creating a new CORMAS Model
 
 
-You can create a new model by creating a new package using _notilus_ \(pharo browser\). It can be done with a mouse right clik or with a shortcut `Ctrl+N+P`.
+You can create a new model by creating a new package using _SystemBrowser_ (`Ctrl+O+B`). It can be done with a mouse right clik or with a shortcut `Ctrl+N+P`.
 
 ![Create a new model](figures/cormas_create_package.png label=newPackage)
 
 #### Defining a spatial entity: the "VegetationUnit"
 
-Once you've got a package model, you can start to create classes using UML from fig. *@umlCormas@*.
+Once you've got a package model, you can start to create classes using UML from fig. *@fig:ecec-UMLCormas@*.
 For exemple, looking for _vegetationUnit_ it work as fig. *@newclassVeg@*:
 
 ```
