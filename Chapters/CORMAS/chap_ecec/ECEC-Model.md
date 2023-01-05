@@ -97,7 +97,7 @@ As the foragers are the located agents of ECEC, the Forager class must inherit f
 
 The brief introduction to Pharo can be found in Chapter *@chap:pharo@*, the instructions to install Cormas are in Section *@sec:pharo-InstallingCormas@*.
 
-#### Creating a new CORMAS Model
+#### Creating a new CORMAS Model. 
 
 
 You can create a new model by creating a new package using _SystemBrowser_ (`Ctrl+O+B`). It can be done with a mouse right clik or with a shortcut `Ctrl+N+P`.
