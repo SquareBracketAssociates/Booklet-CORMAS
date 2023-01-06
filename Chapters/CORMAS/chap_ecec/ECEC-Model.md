@@ -21,7 +21,7 @@ x_{t+1} = x_{t}+r_{x_{t}}(1 - \frac{x_{t}}{k})
 $$
 
 
-%  fig1 was made with R script available in this repo : script/fig1.R 
+%  logisticCurves was created with R script available in: script/logisticCurves.R 
 ![Logistic equation and its sigmoid curves \(r = 0.2 and k = 10\)](figures/logisticCurves.png width=100&label=sigmoth)
 
 #### The Foragers

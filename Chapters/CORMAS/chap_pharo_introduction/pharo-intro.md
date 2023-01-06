@@ -12,5 +12,11 @@ In this chapter, we provide a quick introduction to Pharo.
 Everything that you need to know to use CORMAS.
 For a more detailed introduction, please visit [https://pharo.org/documentation.html]().
 
+### Installing Pharo
+
+For up=to date instructions on how to install Pharo, go to [https://pharo.org/download]()
+
+### 
+
 ### Installing Cormas
 @sec:pharo-InstallingCormas
