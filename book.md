@@ -3,11 +3,11 @@
 
 Based on feedback from experienced research and teaching.
 
-<!inputFile|path=Chapters/chap_modelling_guide/modelling_guide_general.md!>
-<!inputFile|path=Chapters/chap_pharo_introduction/pharo-intro.md!>
-<!inputFile|path=Chapters/chap_stupide/stupide-Model.md!>
-<!inputFile|path=Chapters/chap_fireman/Fireman-Model.md!>
-<!inputFile|path=Chapters/chap_ecec/ECEC-Model.md!>
-<!inputFile|path=Chapters/chap_testing_debugging_profiling_versionning/testing_debugging_profiling_versionning.md!>
-<!inputFile|path=Chapters/chap_Analysis_experiments/Analysis_experiments.md!>
-<!inputFile|path=Chapters/chap_index/index.md!>
+<!inputFile|path=Chapters/ModellingGuide/modelling_guide_general.md!>
+<!inputFile|path=Chapters/PharoIntroduction/pharo-intro.md!>
+<!inputFile|path=Chapters/StupidModel/stupide-Model.md!>
+<!inputFile|path=Chapters/FiremanModel/Fireman-Model.md!>
+<!inputFile|path=Chapters/EcecModel/ECEC-Model.md!>
+<!inputFile|path=Chapters/TestingVersioning/testing_debugging_profiling_versionning.md!>
+<!inputFile|path=Chapters/AnalysisExperiments/Analysis_experiments.md!>
+<!inputFile|path=Chapters/Index/index.md!>
