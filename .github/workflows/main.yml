@@ -1,46 +1,18 @@
-name: Book generation
+name: Pillar >10
 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
+  schedule:
+    - cron:  '0 0 * * 0'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    runs-on: ubuntu-latest
-    
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      - name: Prepare Pillar
-        run: |
-          git clone https://github.com/pillar-markup/pillar.git -b v8.2.6
-          export PATH="$HOME/texlive/bin/x86_64-linux:$PWD/build:$PATH"
-          ./pillar/scripts/ci/install-texlive
-          ./_support/latex/ensure-dependencies-2018.sh
-          ./pillar/scripts/build.sh
-          mkdir artifacts
-          
-      - name: Build PDF
-        run: |
-          export PATH="$HOME/texlive/bin/x86_64-linux:$PWD/build:$PATH"
-          pillar build pdf book.md
-          mv _result/pdf/book.pdf _result/pdf/Booklet-CORMAS.pdf
-      - name: Continuous Release
-        if: ${{ github.event_name == 'push' }}
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: false
-          title: "PDF (continuous release)"
-          files: |
-            _result/pdf/*.pdf
-    
+    uses: SquareBracketAssociates/BookBuilderDashboard/.github/workflows/main.yml@newVersionOfPillar
+    with:
+      bookname: CormasPrimer
